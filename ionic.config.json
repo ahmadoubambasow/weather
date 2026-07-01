@@ -1,0 +1,7 @@
+{
+  "name": "weather-premium",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
