@@ -17,65 +17,84 @@ export const routes: Routes = [
    */
   {
     path: '',
-    redirectTo: 'weather',
+    redirectTo: 'tabs/weather',
     pathMatch: 'full',
   },
 
   /**
-   * Module weather
+   * Navigation
    */
   {
-    path: 'weather',
-    loadComponent: () => import('./app/features/weather/pages/home/home.page').then(m => m.HomePage)
-  },
-  
-  /**
-   * Prévisions
-   */
-  {
-    path: 'forecast',
-    loadComponent: () => import('./app/features/weather/pages/forecast/forecast.page').then( m => m.ForecastPage)
+    path: 'tabs',
+    loadComponent: () => import('./app/features/navigation/pages/tabs/tabs.page').then( m => m.TabsPage),
+
+    children: [
+      /**
+       * Module weather
+       */
+      {
+        path: 'weather',
+        loadComponent: () => import('./app/features/weather/pages/home/home.page').then(m => m.HomePage)
+      },
+      
+      /**
+       * Prévisions
+       */
+      {
+        path: 'forecast',
+        loadComponent: () => import('./app/features/weather/pages/forecast/forecast.page').then( m => m.ForecastPage)
+      },
+
+      /**
+       * Détails météo
+       */
+      {
+        path: 'details',
+        loadComponent: () => import('./app/features/weather/pages/details/details.page').then( m => m.DetailsPage)
+      },
+
+      /**
+       * Recherche
+       */
+      {
+        path: 'search',
+        loadComponent: () => import('./app/features/search/pages/search/search.page').then( m => m.SearchPage)
+      },
+
+      /**
+       * Favoris
+       */
+      {
+        path: 'favorites',
+        loadComponent: () => import('./app/features/favorites/pages/favorites/favorites.page').then( m => m.FavoritesPage)
+      },
+
+      /**
+       * Paramètres
+       */
+      {
+        path: 'settings',
+        loadComponent: () => import('./app/features/settings/pages/settings/settings.page').then( m => m.SettingsPage)
+      },
+
+      /**
+       * Profil
+       */
+      {
+        path: 'profile',
+        loadComponent: () => import('./app/features/profile/pages/profile/profile.page').then( m => m.ProfilePage)
+      },
+
+      {
+        path: '',
+
+        redirectTo: 'weather',
+
+        pathMatch: 'full'
+      }
+    ]
   },
 
-  /**
-   * Détails météo
-   */
-  {
-    path: 'details',
-    loadComponent: () => import('./app/features/weather/pages/details/details.page').then( m => m.DetailsPage)
-  },
-
-  /**
-   * Recherche
-   */
-  {
-    path: 'search',
-    loadComponent: () => import('./app/features/search/pages/search/search.page').then( m => m.SearchPage)
-  },
-
-  /**
-   * Favoris
-   */
-  {
-    path: 'favorites',
-    loadComponent: () => import('./app/features/favorites/pages/favorites/favorites.page').then( m => m.FavoritesPage)
-  },
-
-  /**
-   * Paramètres
-   */
-  {
-    path: 'settings',
-    loadComponent: () => import('./app/features/settings/pages/settings/settings.page').then( m => m.SettingsPage)
-  },
-
-  /**
-   * Profil
-   */
-  {
-    path: 'profile',
-    loadComponent: () => import('./app/features/profile/pages/profile/profile.page').then( m => m.ProfilePage)
-  },
   
   /**
    * Route inconnue.
@@ -84,7 +103,7 @@ export const routes: Routes = [
    */
   {
     path: '**',
-    redirectTo: 'weather',
-    pathMatch: 'full',
-  }
+    redirectTo: 'tabs/weather',
+  },
+
 ];

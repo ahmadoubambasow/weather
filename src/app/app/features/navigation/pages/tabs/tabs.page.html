@@ -1,0 +1,42 @@
+<ion-tabs>
+
+  <!-- Les pages seront chargées ici -->
+  <ion-router-outlet></ion-router-outlet>
+
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="weather" href="/tabs/weather">
+
+      <ion-icon name="partly-sunny-outline"></ion-icon>
+
+      <ion-label>Météo</ion-label>
+
+    </ion-tab-button>
+
+    <ion-tab-button tab="search" href="/tabs/search">
+
+      <ion-icon name="search-outline"></ion-icon>
+
+      <ion-label>Recherche</ion-label>
+
+    </ion-tab-button>
+
+    <ion-tab-button tab="favorites" href="/tabs/favorites">
+
+      <ion-icon name="heart-outline"></ion-icon>
+
+      <ion-label>Favoris</ion-label>
+
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" href="/tabs/settings">
+
+      <ion-icon name="settings-outline"></ion-icon>
+
+      <ion-label>Réglages</ion-label>
+
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

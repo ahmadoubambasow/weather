@@ -1,0 +1,39 @@
+/**
+ * ==========================================================
+ * DESIGN TOKENS - COLORS
+ * ==========================================================
+ *
+ * Toutes les couleurs de l'application sont centralisées ici.
+ * Les composants ne doivent jamais utiliser de couleurs
+ * codées en dur (#FFFFFF, rgb(), etc.).
+ */
+
+:root {
+
+  /* Couleurs principales */
+  --color-primary: #2563EB;
+  --color-primary-light: #60A5FA;
+  --color-primary-dark: #1D4ED8;
+
+  /* Couleurs secondaires */
+  --color-secondary: #7C3AED;
+
+  /* États */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #06B6D4;
+
+  /* Fond */
+  --color-background: #F5F7FB;
+  --color-surface: #FFFFFF;
+
+  /* Texte */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
+  --color-text-disabled: #9CA3AF;
+
+  /* Bordures */
+  --color-border: #E5E7EB;
+
+}

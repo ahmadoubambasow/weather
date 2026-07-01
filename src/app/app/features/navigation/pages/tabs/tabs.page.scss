@@ -1,0 +1,41 @@
+:host {
+  --tab-bar-height: 80px;
+}
+
+ion-tab-bar {
+
+  height: var(--tab-bar-height);
+
+  border: none;
+
+  background: rgba(255,255,255,.90);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow: 0 -5px 20px rgba(0,0,0,.08);
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+ion-tab-button {
+
+  --color: #9CA3AF;
+
+  --color-selected: #2563EB;
+
+  font-weight: 600;
+
+  transition: .3s;
+}
+
+ion-icon {
+
+  font-size: 24px;
+
+}
+
+ion-label {
+
+  font-size: 12px;
+
+}
