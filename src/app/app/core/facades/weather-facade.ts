@@ -1,63 +1,55 @@
-/**
- * ============================================================
- * WeatherFacadeService
- * ============================================================
- *
- * Couche intermédiaire entre UI et services métier.
- *
- * RESPONSABILITÉ :
- * - Transformer les données météo
- * - Simplifier les appels pour les pages
- * - Isoler la logique métier de l'UI
- */
-
 import { Injectable } from '@angular/core';
-import { WeatherService } from '../services/weather';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+
+import { WeatherService } from '../services/weather'; 
+import { WeatherResponse } from 'src/app/core/models/weather-response.model'; 
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class WeatherFacade {
-  
+export class WeatherFacadeService {
+
   constructor(
     private weatherService: WeatherService
-  ) { }
+  ) {}
 
-  /**
-   * Récupérer les données météo et les transformer
-   * pour l'affichage UI.
-   */
-  getWeather(lat: number, lon: number): Observable<any> {
+  getWeather(lat: number, lon: number): Observable<WeatherResponse> {
 
     return this.weatherService.getWeather(lat, lon).pipe(
 
-      map((response: any) => {
-
-        /**
-         * TRANSFORMATION DES DONNEES
-         */
+      map((response: any): WeatherResponse => {
 
         return {
 
           current: {
             temperature: response.current?.temperature_2m,
-            windSpeed: response.current?.wind_speed_10m,
             humidity: response.current?.relative_humidity_2m,
+            windSpeed: response.current?.wind_speed_10m,
             pressure: response.current?.pressure_msl
           },
-          
-          daily: response.daily,
 
-          hourly: response.hourly,
+          daily: {
+            weatherCode: response.daily?.weather_code,
+            temperatureMax: response.daily?.temperature_2m_max,
+            temperatureMin: response.daily?.temperature_2m_min
+          },
+
+          hourly: {
+            temperature: response.hourly?.temperature_2m,
+            weatherCode: response.hourly?.weather_code
+          },
 
           location: {
             lat,
             lon
           }
+
         };
+
       })
+
     );
+
   }
 
 }
