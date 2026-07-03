@@ -26,7 +26,7 @@ export const routes: Routes = [
    */
   {
     path: 'tabs',
-    loadComponent: () => import('./app/features/navigation/pages/tabs/tabs.page').then( m => m.TabsPage),
+    loadComponent: () => import('./features/navigation/pages/tabs/tabs.page').then( m => m.TabsPage),
 
     children: [
       /**
@@ -34,31 +34,31 @@ export const routes: Routes = [
        */
       {
         path: 'weather',
-        loadComponent: () => import('./app/features/weather/pages/home/home.page').then(m => m.HomePage)
+        loadComponent: () => import('./features/weather/pages/home-page/home-page.component').then(m => m.HomePage)
       },
       
       /**
        * Prévisions
        */
-      {
+      /*{
         path: 'forecast',
-        loadComponent: () => import('./app/features/weather/pages/forecast/forecast.page').then( m => m.ForecastPage)
-      },
+        loadComponent: () => import('./features/weather/pages/forecast/forecast.page').then( m => m.ForecastPage)
+      }, */
 
       /**
        * Détails météo
        */
-      {
+     /* {
         path: 'details',
         loadComponent: () => import('./app/features/weather/pages/details/details.page').then( m => m.DetailsPage)
-      },
+      },*/
 
       /**
        * Recherche
        */
       {
         path: 'search',
-        loadComponent: () => import('./app/features/search/pages/search/search.page').then( m => m.SearchPage)
+        loadComponent: () => import('./features/search/pages/search/search.page').then( m => m.SearchPage)
       },
 
       /**
@@ -66,7 +66,7 @@ export const routes: Routes = [
        */
       {
         path: 'favorites',
-        loadComponent: () => import('./app/features/favorites/pages/favorites/favorites.page').then( m => m.FavoritesPage)
+        loadComponent: () => import('./features/favorites/pages/favorites/favorites.page').then( m => m.FavoritesPage)
       },
 
       /**
@@ -74,7 +74,7 @@ export const routes: Routes = [
        */
       {
         path: 'settings',
-        loadComponent: () => import('./app/features/settings/pages/settings/settings.page').then( m => m.SettingsPage)
+        loadComponent: () => import('./features/settings/pages/settings/settings.page').then( m => m.SettingsPage)
       },
 
       /**
@@ -82,7 +82,7 @@ export const routes: Routes = [
        */
       {
         path: 'profile',
-        loadComponent: () => import('./app/features/profile/pages/profile/profile.page').then( m => m.ProfilePage)
+        loadComponent: () => import('./features/profile/pages/profile/profile.page').then( m => m.ProfilePage)
       },
 
       {

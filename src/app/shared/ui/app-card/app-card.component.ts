@@ -20,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
  */
 
 @Component({
-  selector: 'app-app-card',
+  selector: 'app-card',
   templateUrl: './app-card.component.html',
   styleUrls: ['./app-card.component.scss'],
   standalone: true,
