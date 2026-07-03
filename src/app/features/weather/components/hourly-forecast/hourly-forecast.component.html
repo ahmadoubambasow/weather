@@ -1,0 +1,21 @@
+<app-card>
+
+  <h2>Aujourd'hui</h2>
+
+  <div class="forecast-list">
+
+    <div
+      class="forecast-item"
+      *ngFor="let item of forecasts">
+
+      <span>{{ item.time }}</span>
+
+      <span>☀️</span>
+
+      <span>{{ item.temperature }}°</span>
+
+    </div>
+
+  </div>
+
+</app-card>

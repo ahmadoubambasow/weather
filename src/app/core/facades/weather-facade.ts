@@ -1,50 +1,45 @@
-import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { map, Observable } from 'rxjs';
 
-import { WeatherService } from '../services/weather'; 
-import { WeatherResponse } from 'src/app/core/models/weather-response.model'; 
+import { WeatherService } from '../services/weather.service';
 
+import { Weather } from '../models/ui/weather.model';
+import { CurrentWeatherMapper } from '../mappers/current-weather.mapper';
+import { WeatherApiResponse } from '../models/api/weather-api-response.model';
+
+/**
+ * ============================================================
+ * WeatherFacade
+ * ============================================================
+ *
+ * Point d'entrée unique pour l'UI.
+ * Elle orchestre service + mappers.
+ */
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherFacadeService {
+export class WeatherFacade {
 
-  constructor(
-    private weatherService: WeatherService
-  ) {}
+  private readonly weatherService = inject(WeatherService);
 
-  getWeather(lat: number, lon: number): Observable<WeatherResponse> {
+  /**
+   * Retourne la météo actuelle déjà transformée
+   * pour l'interface utilisateur.
+   */
+  getCurrentWeather(
+    latitude: number,
+    longitude: number
+  ): Observable<Weather> {
 
-    return this.weatherService.getWeather(lat, lon).pipe(
+    return this.weatherService.getWeather(latitude, longitude).pipe(
 
-      map((response: any): WeatherResponse => {
+      map((response: WeatherApiResponse) => {
 
-        return {
-
-          current: {
-            temperature: response.current?.temperature_2m,
-            humidity: response.current?.relative_humidity_2m,
-            windSpeed: response.current?.wind_speed_10m,
-            pressure: response.current?.pressure_msl
-          },
-
-          daily: {
-            weatherCode: response.daily?.weather_code,
-            temperatureMax: response.daily?.temperature_2m_max,
-            temperatureMin: response.daily?.temperature_2m_min
-          },
-
-          hourly: {
-            temperature: response.hourly?.temperature_2m,
-            weatherCode: response.hourly?.weather_code
-          },
-
-          location: {
-            lat,
-            lon
-          }
-
-        };
+        // On transforme uniquement la partie "current"
+        return CurrentWeatherMapper.toUiModel(
+          response.current,
+          'Dakar' // temporaire (sera remplacé par géolocalisation)
+        );
 
       })
 

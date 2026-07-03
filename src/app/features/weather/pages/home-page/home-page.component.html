@@ -2,69 +2,49 @@
 
   <div class="page">
 
-    <app-current-weather-card
-    
-      [location]="weather.location"
+    <!-- 🌤️ Météo actuelle -->
+    <ng-container *ngIf="weather$ | async as weather">
 
-      [temperature]="weather.temperature"
+      <app-current-weather-card
+        [location]="weather.location"
+        [temperature]="weather.temperature"
+        [description]="weather.description"
+        [feelsLike]="weather.feelsLike">
+      </app-current-weather-card>
 
-      [description]="weather.description"
+      <!-- 📊 Métriques -->
+      <div class="metrics">
 
-      [feelsLike]="weather.feelsLike"
+        <app-weather-metric-card
+          icon="water-outline"
+          title="Humidité"
+          [value]="weather.humidity"
+          unit="%">
+        </app-weather-metric-card>
 
-    >
-      
-    </app-current-weather-card>
+        <app-weather-metric-card
+          icon="navigate-outline"
+          title="Vent"
+          [value]="weather.windSpeed"
+          unit="km/h">
+        </app-weather-metric-card>
 
-    <div class="metrics">
+        <app-weather-metric-card
+          icon="speedometer-outline"
+          title="Pression"
+          [value]="weather.pressure"
+          unit="hPa">
+        </app-weather-metric-card>
 
-      <app-weather-metric-card
+        <app-weather-metric-card
+          icon="sunny-outline"
+          title="UV"
+          [value]="6">
+        </app-weather-metric-card>
 
-        icon="water-outline"
+      </div>
 
-        title="Humidité"
-
-        [value]="weather.humidity"
-
-        unit="%">
-
-      </app-weather-metric-card>
-
-      <app-weather-metric-card
-
-        icon="navigate-outline"
-
-        title="Vent"
-
-        [value]="weather.windSpeed"
-
-        unit="km/h">
-
-      </app-weather-metric-card>
-
-      <app-weather-metric-card
-
-        icon="speedometer-outline"
-
-        title="Pression"
-
-        [value]="weather.pressure"
-
-        unit="hPa">
-
-      </app-weather-metric-card>
-
-      <app-weather-metric-card
-
-        icon="sunny-outline"
-
-        title="UV"
-
-        [value]="weather.uvIndex">
-
-      </app-weather-metric-card>
-
-    </div>
+    </ng-container>
 
   </div>
 
