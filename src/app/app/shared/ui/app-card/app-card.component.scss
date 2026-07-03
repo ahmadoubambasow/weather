@@ -1,0 +1,31 @@
+/**
+ * Carte premium réutilisable.
+ */
+
+.card {
+
+  background: var(--color-surface);
+
+  border-radius: var(--radius-lg);
+
+  padding: var(--space-20);
+
+  box-shadow: var(--shadow-md);
+
+  transition: all var(--transition-normal);
+
+  border: 1px solid var(--color-border);
+
+}
+
+/**
+ * Animation au survol.
+ * Sur mobile, elle sera visible lors des interactions.
+ */
+.card:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow-lg);
+
+}
