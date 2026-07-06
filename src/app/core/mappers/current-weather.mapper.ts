@@ -1,26 +1,41 @@
+import { Injectable, inject } from '@angular/core';
+
 import { CurrentWeatherApi } from '../models/api/current-weather-api.model';
+
 import { Weather } from '../models/ui/weather.model';
+import { WeatherCodeService } from '../services/weather-code';
+
 
 /**
  * ============================================================
  * CurrentWeatherMapper
  * ============================================================
  *
- * Transforme les données "current" de l'API
+ * Transforme les données de l'API
  * en modèle utilisé par l'interface.
  */
+
+@Injectable({
+  providedIn: 'root'
+})
 export class CurrentWeatherMapper {
 
   /**
-   * Convertit les données API en modèle UI.
-   *
-   * @param api Données renvoyées par Open-Meteo
-   * @param location Nom de la ville (sera fourni plus tard)
+   * Service de correspondance
+   * des codes météo.
    */
-  static toUiModel(
+  private readonly weatherCodeService = inject(WeatherCodeService);
+
+  /**
+   * Conversion API → UI.
+   */
+  toUiModel(
     api: CurrentWeatherApi,
-    location: string = 'Position actuelle'
+    location: string
   ): Weather {
+
+    const weatherInfo =
+      this.weatherCodeService.get(api.weather_code);
 
     return {
 
@@ -38,8 +53,13 @@ export class CurrentWeatherMapper {
 
       weatherCode: api.weather_code,
 
-      // Temporaire : sera remplacé par WeatherCodeService
-      description: 'Chargement...'
+      description: weatherInfo.description,
+
+      icon: weatherInfo.icon,
+
+      background: weatherInfo.background,
+
+      animation: weatherInfo.animation
 
     };
 

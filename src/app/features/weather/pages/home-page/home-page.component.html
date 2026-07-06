@@ -3,13 +3,13 @@
   <div class="page">
 
     <!-- 🌤️ Météo actuelle -->
-    <ng-container *ngIf="weather$ | async as weather">
+    <ng-container *ngIf="dashboard$ | async as dashboard">
 
       <app-current-weather-card
-        [location]="weather.location"
-        [temperature]="weather.temperature"
-        [description]="weather.description"
-        [feelsLike]="weather.feelsLike">
+        [location]="dashboard.current.location"
+        [temperature]="dashboard.current.temperature"
+        [description]="dashboard.current.description"
+        [feelsLike]="dashboard.current.feelsLike">
       </app-current-weather-card>
 
       <!-- 📊 Métriques -->
@@ -18,21 +18,21 @@
         <app-weather-metric-card
           icon="water-outline"
           title="Humidité"
-          [value]="weather.humidity"
+          [value]="dashboard.current.humidity"
           unit="%">
         </app-weather-metric-card>
 
         <app-weather-metric-card
           icon="navigate-outline"
           title="Vent"
-          [value]="weather.windSpeed"
+          [value]="dashboard.current.windSpeed"
           unit="km/h">
         </app-weather-metric-card>
 
         <app-weather-metric-card
           icon="speedometer-outline"
           title="Pression"
-          [value]="weather.pressure"
+          [value]="dashboard.current.pressure"
           unit="hPa">
         </app-weather-metric-card>
 

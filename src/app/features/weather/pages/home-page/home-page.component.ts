@@ -7,6 +7,7 @@ import { HourlyForecastComponent } from "../../components/hourly-forecast/hourly
 import { Observable } from 'rxjs';
 import { Weather } from 'src/app/core/models/ui/weather.model';
 import { WeatherFacade } from '../../../../core/facades/weather-facade';
+import { WeatherDashboardViewModel } from 'src/app/core/models/ui/weather-dashboard.viewmodel';
 
 @Component({
   selector: 'app-home-page',
@@ -25,13 +26,13 @@ export class HomePage {
   /**
    * Observable météo actuelle
    */
-  weather$: Observable<Weather>;
+  dashboard$: Observable<WeatherDashboardViewModel>;
 
   constructor(
     private weatherFacade: WeatherFacade
   ) {
 
     // Coordonnées Dakar (temporaire)
-    this.weather$ = this.weatherFacade.getCurrentWeather(14.6667, -17.3333);
+    this.dashboard$ = this.weatherFacade.getDashboard(14.6928, -17.4467);
   }
 }
