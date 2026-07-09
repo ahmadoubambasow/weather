@@ -1,0 +1,75 @@
+.background{
+
+    min-height:100vh;
+
+    transition:all .6s ease;
+
+    color:white;
+
+}
+
+/* Soleil */
+
+.sunny{
+
+    background:
+    linear-gradient(
+        180deg,
+        #4facfe 0%,
+        #00f2fe 40%,
+        #fcb045 100%
+    );
+
+}
+
+/* Nuageux */
+
+.cloudy{
+
+    background:
+    linear-gradient(
+        180deg,
+        #6a85b6,
+        #bac8e0
+    );
+
+}
+
+/* Pluie */
+
+.rain{
+
+    background:
+    linear-gradient(
+        180deg,
+        #485563,
+        #29323c
+    );
+
+}
+
+/* Orage */
+
+.storm{
+
+    background:
+    linear-gradient(
+        180deg,
+        #232526,
+        #414345
+    );
+
+}
+
+/* Défaut */
+
+.default{
+
+    background:
+    linear-gradient(
+        180deg,
+        #4facfe,
+        #00f2fe
+    );
+
+}

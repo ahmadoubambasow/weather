@@ -39,4 +39,6 @@ export interface CurrentWeatherApi {
    */
   weather_code: number;
 
+  uv_index: number;
+
 }

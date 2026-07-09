@@ -1,3 +1,4 @@
+
 <ion-content fullscreen>
 
   <div class="page">
@@ -5,12 +6,23 @@
     <!-- 🌤️ Météo actuelle -->
     <ng-container *ngIf="dashboard$ | async as dashboard">
 
-      <app-current-weather-card
+      <app-weather-background
+        [background]="dashboard.current.background"
+      >
+      
+
+        <app-current-weather-card
         [location]="dashboard.current.location"
         [temperature]="dashboard.current.temperature"
         [description]="dashboard.current.description"
         [feelsLike]="dashboard.current.feelsLike">
       </app-current-weather-card>
+
+      <app-daily-forecast
+
+        [forecasts]="dashboard.daily">
+
+    </app-daily-forecast>
 
       <!-- 📊 Métriques -->
       <div class="metrics">
@@ -43,6 +55,9 @@
         </app-weather-metric-card>
 
       </div>
+
+
+      </app-weather-background>
 
     </ng-container>
 

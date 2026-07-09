@@ -41,7 +41,8 @@ export class WeatherService {
         'apparent_temperature',
         'weather_code',
         'wind_speed_10m',
-        'surface_pressure'
+        'surface_pressure',
+        'uv_index'
       ].join(','),
 
        hourly: [

@@ -1,0 +1,36 @@
+<h2>7 prochains jours</h2>
+
+<div 
+  class="forecast-row"
+  *ngFor="let day of forecasts"
+>
+
+  <span class="day">
+    {{ day.day }}
+  </span>
+
+  <ion-icon
+    [name]="day.icon"
+  ></ion-icon>
+
+  <span 
+    class="description"
+  >
+
+    {{ day.description }}
+
+  </span>
+
+  <span 
+    class="temperature"
+  >
+
+    {{ day.maxTemperature }}°
+
+    /
+
+   {{ day.minTemperature }}°
+
+  </span>
+
+</div>
