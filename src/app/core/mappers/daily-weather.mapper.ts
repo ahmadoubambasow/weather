@@ -39,7 +39,9 @@ export class DailyWeatherMarpper {
 
                 description: weather.description,
 
-                icon: weather.icon
+                icon: weather.icon,
+
+                isToday: index === 0
             };
         });
 
@@ -48,11 +50,55 @@ export class DailyWeatherMarpper {
     /**
      * Transforme une date ISO en jour de la semaine
      */
-    private formatDay(date: string): string {
+    private formatDay(date:string):string {
 
-        return new Date(date).toLocaleDateString('fr-FR', { 
-            weekday: 'short' 
-        });
+
+    const today = new Date();
+
+    const current =
+        new Date(date);
+
+
+
+    const diff =
+        Math.floor(
+
+        (
+            current.getTime()
+            -
+            today.setHours(0,0,0,0)
+
+        )
+        /
+        (1000*60*60*24)
+
+        );
+
+
+
+    if(diff === 0){
+
+        return "Aujourd'hui";
+
+    }
+
+
+
+    if(diff === 1){
+
+        return "Demain";
+
+    }
+
+
+
+    return current.toLocaleDateString(
+        'fr-FR',
+        {
+        weekday:'long'
+        }
+    );
+
 
     }
 

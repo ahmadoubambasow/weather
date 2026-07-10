@@ -39,4 +39,6 @@ export interface DailyForecast {
    */
   icon: string;
 
+  isToday?: boolean;
+
 }
