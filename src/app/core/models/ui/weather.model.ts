@@ -62,4 +62,9 @@ export interface Weather {
    */
   animation: string;
 
+  /**
+   * Indice UV.
+   */
+  uvIndex: number;
+
 }

@@ -1,48 +1,186 @@
 .weather-card {
 
-  display: flex;
 
-  flex-direction: column;
+  display:flex;
 
-  align-items: center;
+  flex-direction:column;
 
-  gap: var(--space-12);
+  align-items:center;
+
+  text-align:center;
+
+  gap:18px;
+
 
 }
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Localisation
+|--------------------------------------------------------------------------
+*/
 
 .location {
 
-  font-size: var(--font-sm);
 
-  color: var(--color-text-secondary);
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+
+
+  font-size:16px;
+
+  font-weight:600;
+
+
+  color:
+
+    rgba(15,23,42,.75);
+
 
 }
+
+
+
+.location ion-icon {
+
+
+  font-size:20px;
+
+  color:#2563eb;
+
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Icône météo
+|--------------------------------------------------------------------------
+*/
 
 .icon {
 
-  font-size: 56px;
+
+  font-size:72px;
+
+
+  margin-top:10px;
+
+
+  filter:
+
+    drop-shadow(
+      0 8px 15px rgba(0,0,0,.20)
+    );
+
 
 }
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Température principale
+|--------------------------------------------------------------------------
+*/
 
 .temperature {
 
-  font-size: 64px;
 
-  font-weight: 700;
+  font-size:84px;
 
-  color: var(--color-text-secondary);
+
+  line-height:1;
+
+
+  font-weight:900;
+
+
+  letter-spacing:-3px;
+
+
+  color:#0f172a;
+
 
 
 }
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Description météo
+|--------------------------------------------------------------------------
+*/
 
 .description {
 
-  color: var(--color-text-secondary);
+
+  font-size:20px;
+
+
+  font-weight:600;
+
+
+  color:#334155;
+
+
 
 }
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Ressenti
+|--------------------------------------------------------------------------
+*/
+
 .feels {
 
-  color: var(--color-text-disabled);
+
+  padding:
+
+    8px 20px;
+
+
+
+  border-radius:25px;
+
+
+
+  background:
+
+    rgba(37,99,235,.12);
+
+
+
+  border:
+
+    1px solid rgba(37,99,235,.20);
+
+
+
+  color:#1d4ed8;
+
+
+
+  font-size:14px;
+
+
+  font-weight:600;
+
+
+
+  backdrop-filter:
+
+    blur(10px);
+
 
 }

@@ -1,65 +1,201 @@
 .forecast-card {
 
-    margin-top: 24px;
-
-    padding: 20px;
-
-    border-radius: 24px;
-
-    background: rgba(255,255,255,.08);
-
-    backdrop-filter: blur(18px);
+  width:100%;
 
 }
 
-h2{
 
-    margin-bottom:16px;
 
-    font-size:18px;
+/*
+|--------------------------------------------------------------------------
+| Titre
+|--------------------------------------------------------------------------
+*/
 
-    font-weight:600;
+h2 {
 
-}
+  margin-bottom:20px;
 
-.forecast-row{
+  font-size:20px;
 
-    display:flex;
+  font-weight:800;
 
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:12px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
+  color:#0f172a;
 
 }
 
-.forecast-row:last-child{
 
-    border:none;
+
+/*
+|--------------------------------------------------------------------------
+| Ligne quotidienne
+|--------------------------------------------------------------------------
+*/
+
+.forecast-row {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  padding:14px 0;
+
+
+  border-bottom:
+
+    1px solid
+
+    rgba(15,23,42,.10);
+
 
 }
 
-.day{
 
-    width:60px;
 
-    font-weight:600;
+.forecast-row:last-child {
 
-}
-
-.description{
-
-    flex:1;
-
-    margin-left:15px;
+  border-bottom:none;
 
 }
 
-.temperature{
 
-    font-weight:bold;
+
+/*
+|--------------------------------------------------------------------------
+| Jour
+|--------------------------------------------------------------------------
+*/
+
+.day {
+
+  width:55px;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  text-transform:capitalize;
+
+  color:#334155;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Icône météo
+|--------------------------------------------------------------------------
+*/
+
+.weather-icon {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  width:38px;
+
+}
+
+
+
+.weather-icon ion-icon {
+
+  font-size:30px;
+
+  color:#2563eb;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Description
+|--------------------------------------------------------------------------
+*/
+
+.description {
+
+  flex:1;
+
+  font-size:14px;
+
+  font-weight:500;
+
+  color:#64748b;
+
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Températures
+|--------------------------------------------------------------------------
+*/
+
+.temperature {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  font-size:16px;
+
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Température max
+|--------------------------------------------------------------------------
+*/
+
+.max {
+
+  font-weight:900;
+
+  color:#0f172a;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Séparateur
+|--------------------------------------------------------------------------
+*/
+
+.separator {
+
+  color:#94a3b8;
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Température min
+|--------------------------------------------------------------------------
+*/
+
+.min {
+
+  font-weight:600;
+
+  color:#94a3b8;
 
 }

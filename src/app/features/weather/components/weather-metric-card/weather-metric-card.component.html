@@ -2,22 +2,48 @@
 
   <div class="metric">
 
+
+    <!-- Entête -->
     <div class="header">
 
-      <ion-icon [name]="icon"></ion-icon>
+      <div class="icon-box">
 
-      <span>{{ title }}</span>
+        <ion-icon
+          [name]="icon">
+        </ion-icon>
+
+      </div>
+
+
+      <span class="title">
+
+        {{ title }}
+
+      </span>
+
 
     </div>
 
+
+
+    <!-- Valeur -->
     <div class="value">
+
 
       {{ value }}
 
-      <small>{{ unit }}</small>
+
+      <small>
+
+        {{ unit }}
+
+      </small>
+
 
     </div>
 
+
   </div>
+
 
 </app-card>

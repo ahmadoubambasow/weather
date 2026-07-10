@@ -28,16 +28,42 @@
 
 }
 
-.value {
+.title {
 
-  font-size: 30px;
+  font-size:14px;
 
-  font-weight: 700;
+  font-weight:600;
+
+  color:#64748b;
 
 }
 
+
+
+.value {
+
+  display:flex;
+
+  align-items:baseline;
+
+  gap:6px;
+
+  font-size:34px;
+
+  font-weight:800;
+
+  color:#0f172a;
+
+}
+
+
+
 .value small {
 
-  font-size: var(--font-sm);
+  font-size:15px;
+
+  font-weight:500;
+
+  color:#64748b;
 
 }

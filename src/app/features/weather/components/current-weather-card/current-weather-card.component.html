@@ -2,25 +2,52 @@
 
   <div class="weather-card">
 
+
+    <!-- Localisation -->
     <div class="location">
-      📍 {{ location }}
+
+      <ion-icon name="location-outline"></ion-icon>
+
+      {{ location }}
+
     </div>
 
+
+
+    <!-- Icône météo -->
     <div class="icon">
-      ☀️
+
+      {{ icon }}
+
     </div>
 
+
+
+    <!-- Température principale -->
     <div class="temperature">
+
       {{ temperature }}°
+
     </div>
 
+
+
+    <!-- Description -->
     <div class="description">
+
       {{ description }}
+
     </div>
 
+
+
+    <!-- Température ressentie -->
     <div class="feels">
-      Ressenti : {{ feelsLike }}°
+
+      Ressenti {{ feelsLike }}°
+
     </div>
+
 
   </div>
 

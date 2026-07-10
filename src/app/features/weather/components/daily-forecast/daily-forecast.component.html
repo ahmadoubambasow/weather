@@ -1,36 +1,79 @@
-<h2>7 prochains jours</h2>
+<app-card>
 
-<div 
-  class="forecast-row"
-  *ngFor="let day of forecasts"
->
+  <div class="forecast-card">
 
-  <span class="day">
-    {{ day.day }}
-  </span>
 
-  <ion-icon
-    [name]="day.icon"
-  ></ion-icon>
+    <!-- Titre -->
+    <h2>
+      Prévisions sur 7 jours
+    </h2>
 
-  <span 
-    class="description"
-  >
 
-    {{ day.description }}
 
-  </span>
+    <div
+      class="forecast-row"
+      *ngFor="let day of forecasts"
+    >
 
-  <span 
-    class="temperature"
-  >
 
-    {{ day.maxTemperature }}°
+      <!-- Jour -->
+      <div class="day">
 
-    /
+        {{ day.day }}
 
-   {{ day.minTemperature }}°
+      </div>
 
-  </span>
 
-</div>
+
+      <!-- Icône -->
+      <div class="weather-icon">
+
+        <ion-icon
+          [name]="day.icon">
+        </ion-icon>
+
+      </div>
+
+
+
+      <!-- Description -->
+      <div class="description">
+
+        {{ day.description }}
+
+      </div>
+
+
+
+      <!-- Températures -->
+      <div class="temperature">
+
+
+        <span class="max">
+
+          {{ day.maxTemperature }}°
+
+        </span>
+
+
+        <span class="separator">
+          /
+        </span>
+
+
+        <span class="min">
+
+          {{ day.minTemperature }}°
+
+        </span>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</app-card>

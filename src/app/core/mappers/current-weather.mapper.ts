@@ -51,6 +51,8 @@ export class CurrentWeatherMapper {
 
       windSpeed: api.wind_speed_10m,
 
+      uvIndex: api.uv_index,
+
       weatherCode: api.weather_code,
 
       description: weatherInfo.description,

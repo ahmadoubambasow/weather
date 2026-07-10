@@ -1,24 +1,155 @@
-.page {
+:host {
 
-  padding: var(--space-20);
 
-  display: flex;
+  &.humidity {
 
-  flex-direction: column;
 
-  gap: var(--space-20);
+    .icon-box ion-icon {
+
+      color:#0ea5e9;
+
+    }
+
+
+  }
+
+
+
+  &.wind {
+
+
+    .icon-box ion-icon {
+
+      color:#22c55e;
+
+    }
+
+
+  }
+
+
+
+  &.pressure {
+
+
+    .icon-box ion-icon {
+
+      color:#8b5cf6;
+
+    }
+
+
+  }
+
+
+
+  &.uv {
+
+
+    .icon-box ion-icon {
+
+      color:#f59e0b;
+
+    }
+
+
+  }
+
 
 }
 
+.page {
+
+
+  padding:
+
+    20px;
+
+
+  display:flex;
+
+
+  flex-direction:column;
+
+
+  gap:24px;
+
+
+}
+
+
+
+.current-section {
+
+
+  margin-top:20px;
+
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Grille des indicateurs
+|--------------------------------------------------------------------------
+*/
+
+
 .metrics {
 
-  display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  display:grid;
 
-  gap: var(--space-16);
 
-  color: var(--color-text-secondary);
+  grid-template-columns:
+
+    repeat(2, 1fr);
+
+
+  gap:16px;
+
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Prévisions
+|--------------------------------------------------------------------------
+*/
+
+
+.daily-section {
+
+
+  margin-top:8px;
+
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Mobile compact
+|--------------------------------------------------------------------------
+*/
+
+
+@media(max-width:360px){
+
+
+  .metrics {
+
+
+    grid-template-columns:
+
+      1fr;
+
+
+  }
 
 
 }

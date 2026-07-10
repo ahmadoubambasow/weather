@@ -1,66 +1,133 @@
-
 <ion-content fullscreen>
 
-  <div class="page">
 
-    <!-- 🌤️ Météo actuelle -->
-    <ng-container *ngIf="dashboard$ | async as dashboard">
+  <ng-container *ngIf="dashboard$ | async as dashboard">
 
-      <app-weather-background
-        [background]="dashboard.current.background"
-      >
-      
 
-        <app-current-weather-card
-        [location]="dashboard.current.location"
-        [temperature]="dashboard.current.temperature"
-        [description]="dashboard.current.description"
-        [feelsLike]="dashboard.current.feelsLike">
-      </app-current-weather-card>
+    <app-weather-background
+      [background]="dashboard.current.background">
 
-      <app-daily-forecast
 
-        [forecasts]="dashboard.daily">
+      <div class="page">
 
-    </app-daily-forecast>
 
-      <!-- 📊 Métriques -->
-      <div class="metrics">
 
-        <app-weather-metric-card
-          icon="water-outline"
-          title="Humidité"
-          [value]="dashboard.current.humidity"
-          unit="%">
-        </app-weather-metric-card>
+        <!-- 🌤️ Carte principale -->
 
-        <app-weather-metric-card
-          icon="navigate-outline"
-          title="Vent"
-          [value]="dashboard.current.windSpeed"
-          unit="km/h">
-        </app-weather-metric-card>
+        <section class="current-section">
 
-        <app-weather-metric-card
-          icon="speedometer-outline"
-          title="Pression"
-          [value]="dashboard.current.pressure"
-          unit="hPa">
-        </app-weather-metric-card>
+          <app-current-weather-card
 
-        <app-weather-metric-card
-          icon="sunny-outline"
-          title="UV"
-          [value]="6">
-        </app-weather-metric-card>
+            [location]="dashboard.current.location"
+
+            [temperature]="dashboard.current.temperature"
+
+            [description]="dashboard.current.description"
+
+            [feelsLike]="dashboard.current.feelsLike"
+
+            [icon]="dashboard.current.icon">
+
+          </app-current-weather-card>
+
+        </section>
+
+
+
+
+        <!-- 📊 Indicateurs -->
+
+        <section class="metrics">
+
+
+          <app-weather-metric-card
+
+            class="humidity"
+
+            icon="water-outline"
+
+            title="Humidité"
+
+            [value]="dashboard.current.humidity"
+
+            unit="%">
+
+          </app-weather-metric-card>
+
+
+
+          <app-weather-metric-card
+
+            class="wind"
+
+            icon="navigate-outline"
+
+            title="Vent"
+
+            [value]="dashboard.current.windSpeed"
+
+            unit="km/h">
+
+          </app-weather-metric-card>
+
+
+
+          <app-weather-metric-card
+
+            class="pressure"
+
+            icon="speedometer-outline"
+
+            title="Pression"
+
+            [value]="dashboard.current.pressure"
+
+            unit="hPa">
+
+          </app-weather-metric-card>
+
+
+
+          <app-weather-metric-card
+
+            class="uv"
+
+            icon="sunny-outline"
+
+            title="UV"
+
+            [value]="dashboard.current.uvIndex">
+
+          </app-weather-metric-card>
+
+
+        </section>
+
+
+
+
+        <!-- 📅 Prévisions -->
+
+        <section class="daily-section">
+
+
+          <app-daily-forecast
+
+            [forecasts]="dashboard.daily">
+
+          </app-daily-forecast>
+
+
+        </section>
+
 
       </div>
 
 
-      </app-weather-background>
+    </app-weather-background>
 
-    </ng-container>
 
-  </div>
+  </ng-container>
+
 
 </ion-content>
