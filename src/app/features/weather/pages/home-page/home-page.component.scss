@@ -1,155 +1,60 @@
 :host {
-
-
-  &.humidity {
-
-
-    .icon-box ion-icon {
-
-      color:#0ea5e9;
-
-    }
-
-
-  }
-
-
-
-  &.wind {
-
-
-    .icon-box ion-icon {
-
-      color:#22c55e;
-
-    }
-
-
-  }
-
-
-
-  &.pressure {
-
-
-    .icon-box ion-icon {
-
-      color:#8b5cf6;
-
-    }
-
-
-  }
-
-
-
-  &.uv {
-
-
-    .icon-box ion-icon {
-
-      color:#f59e0b;
-
-    }
-
-
-  }
-
-
+  &.humidity { .icon-box { ion-icon { color: #0ea5e9; } } }
+  &.wind     { .icon-box { ion-icon { color: #22c55e; } } }
+  &.pressure { .icon-box { ion-icon { color: #8b5cf6; } } }
+  &.uv       { .icon-box { ion-icon { color: #f59e0b; } } }
 }
 
 .page {
-
-
-  padding:
-
-    20px;
-
-
-  display:flex;
-
-
-  flex-direction:column;
-
-
-  gap:24px;
-
-
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
+/* Titres de sections uniformes et modernes */
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75); // Ajusté pour ressortir sur le background météo
+  margin: 0 0 12px 4px;
+}
 
-
+/* 🌤️ Section Actuelle */
 .current-section {
-
-
-  margin-top:20px;
-
-
+  margin-top: 10vh; // Légère marge pour centrer visuellement le haut sur l'écran mobile
 }
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Grille des indicateurs
-|--------------------------------------------------------------------------
-*/
-
-
-.metrics {
-
-
-  display:grid;
-
-
-  grid-template-columns:
-
-    repeat(2, 1fr);
-
-
-  gap:16px;
-
-
+/* 🕒 Section Horaires */
+.hourly-section {
+  width: 100%;
+  // Note : Assurez-vous que <app-hourly-forecast> possède un style de scroll horizontal 
+  // ex: display: flex; overflow-x: auto; dans son propre CSS.
 }
 
+/* 📊 Grille des Indicateurs */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
 
-
-/*
-|--------------------------------------------------------------------------
-| Prévisions
-|--------------------------------------------------------------------------
-*/
-
-
+/* 📅 Section Quotidienne */
 .daily-section {
-
-
-  margin-top:8px;
-
-
+  margin-bottom: 20px;
 }
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Mobile compact
-|--------------------------------------------------------------------------
-*/
-
-
-@media(max-width:360px){
-
-
-  .metrics {
-
-
-    grid-template-columns:
-
-      1fr;
-
-
+/* 📱 Responsive Mobile Compact */
+@media (max-width: 360px) {
+  .page {
+    gap: 20px;
+    padding: 16px 12px;
   }
-
-
+  
+  .metrics-grid {
+    grid-template-columns: 1fr; // Passage sur une colonne sur très petits écrans
+    gap: 10px;
+  }
 }

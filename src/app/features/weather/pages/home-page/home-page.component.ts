@@ -11,6 +11,7 @@ import { WeatherDashboardViewModel } from 'src/app/core/models/ui/weather-dashbo
 import { GeolocationService } from 'src/app/core/services/geolocation';
 import { DailyForecastComponent } from '../../components/daily-forecast/daily-forecast.component';
 import { WeatherBackgroundComponent } from 'src/app/shared/ui/weather-background/weather-background.component';
+import { HourlyCardComponent } from "src/app/shared/components/hourly-card/hourly-card.component";
 
 @Component({
   selector: 'app-home-page',
@@ -21,9 +22,10 @@ import { WeatherBackgroundComponent } from 'src/app/shared/ui/weather-background
     IonContent,
     CurrentWeatherCardComponent,
     WeatherMetricCardComponent,
-    HourlyForecastComponent,
     DailyForecastComponent,
-    WeatherBackgroundComponent
+    WeatherBackgroundComponent,
+    HourlyForecastComponent,
+    HourlyCardComponent
 ]
 })
 export class HomePage implements OnInit {

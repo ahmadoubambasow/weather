@@ -1,21 +1,50 @@
 <app-card>
 
-  <h2>Aujourd'hui</h2>
+  <div class="hourly-card">
 
-  <div class="forecast-list">
 
-    <div
-      class="forecast-item"
-      *ngFor="let item of forecasts">
+    <h2>
+      Prévisions horaires
+    </h2>
 
-      <span>{{ item.time }}</span>
 
-      <span>☀️</span>
+    <div class="hourly-scroll">
 
-      <span>{{ item.temperature }}°</span>
+
+      <div
+        class="hour"
+        *ngFor="let item of forecasts"
+      >
+
+
+        <span class="time">
+
+          {{ item.time }}
+
+        </span>
+
+
+
+        <ion-icon
+          name="partly-sunny-outline">
+        </ion-icon>
+
+
+
+        <span class="temperature">
+
+          {{ item.temperature }}°
+
+        </span>
+
+
+      </div>
+
 
     </div>
 
+
   </div>
+
 
 </app-card>

@@ -1,49 +1,109 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+
 import { HourlyWeatherApi } from '../models/api/hourly-weather-api.model';
+
 import { HourlyForecast } from '../models/ui/hourly-forecast.model';
-import { WeatherCodeService } from '../services/weather-code';
+
 
 /**
  * ============================================================
  * HourlyWeatherMapper
  * ============================================================
  *
- * Transforme les données brutes de l'API Open-Meteo
- * en données prêtes à être affichées dans l'interface.
+ * Transforme les données horaires Open-Meteo
+ * en données utilisables par l'interface.
+ *
+ * API :
+ *
+ * time:[]
+ * temperature_2m:[]
+ * weather_code:[]
+ *
+ *
+ * UI :
+ *
+ * [
+ *   {
+ *    time,
+ *    temperature,
+ *    weatherCode
+ *   }
+ * ]
+ *
+ * ============================================================
  */
 
-@Injectable({
-  providedIn: 'root'
-})
 
+@Injectable({
+  providedIn:'root'
+})
 export class HourlyWeatherMapper {
 
-  private readonly weatherCodeService =
-    inject(WeatherCodeService);
 
+
+  /**
+   * Conversion API → UI
+   */
   toUiModel(
+
     api: HourlyWeatherApi
+
   ): HourlyForecast[] {
 
-    return api.time.map((time, index) => {
 
-      const weather =
-        this.weatherCodeService.get(
-          api.weather_code[index]
-        );
+    return api.time.map(
 
-      return {
+      (time,index)=>{
 
-        time: time.substring(11, 16),
 
-        temperature: api.temperature_2m[index],
+        return {
 
-        weatherCode: api.weather_code[index],
 
-      };
+          /**
+           * Heure affichée
+           */
+          time:
 
-    });
+            new Date(time)
+            .toLocaleTimeString(
+
+              'fr-FR',
+
+              {
+                hour:'2-digit',
+                minute:'2-digit'
+              }
+
+            ),
+
+
+
+          /**
+           * Température associée
+           */
+          temperature:
+
+            api.temperature_2m[index],
+
+
+
+          /**
+           * Code météo
+           */
+          weatherCode:
+
+            api.weather_code[index]
+
+
+        };
+
+
+      }
+
+    );
+
 
   }
+
 
 }

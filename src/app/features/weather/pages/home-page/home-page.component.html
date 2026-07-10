@@ -1,133 +1,71 @@
 <ion-content fullscreen>
-
-
   <ng-container *ngIf="dashboard$ | async as dashboard">
-
-
-    <app-weather-background
-      [background]="dashboard.current.background">
-
-
+    <app-weather-background [background]="dashboard.current.background">
+      
       <div class="page">
 
-
-
         <!-- 🌤️ Carte principale -->
-
         <section class="current-section">
-
           <app-current-weather-card
-
             [location]="dashboard.current.location"
-
             [temperature]="dashboard.current.temperature"
-
             [description]="dashboard.current.description"
-
             [feelsLike]="dashboard.current.feelsLike"
-
             [icon]="dashboard.current.icon">
-
           </app-current-weather-card>
-
         </section>
 
-
-
-
-        <!-- 📊 Indicateurs -->
-
-        <section class="metrics">
-
-
-          <app-weather-metric-card
-
-            class="humidity"
-
-            icon="water-outline"
-
-            title="Humidité"
-
-            [value]="dashboard.current.humidity"
-
-            unit="%">
-
-          </app-weather-metric-card>
-
-
-
-          <app-weather-metric-card
-
-            class="wind"
-
-            icon="navigate-outline"
-
-            title="Vent"
-
-            [value]="dashboard.current.windSpeed"
-
-            unit="km/h">
-
-          </app-weather-metric-card>
-
-
-
-          <app-weather-metric-card
-
-            class="pressure"
-
-            icon="speedometer-outline"
-
-            title="Pression"
-
-            [value]="dashboard.current.pressure"
-
-            unit="hPa">
-
-          </app-weather-metric-card>
-
-
-
-          <app-weather-metric-card
-
-            class="uv"
-
-            icon="sunny-outline"
-
-            title="UV"
-
-            [value]="dashboard.current.uvIndex">
-
-          </app-weather-metric-card>
-
-
+        <!-- 🕒 Prévisions Horaires (Nouvelle Section Isolée) -->
+        <section class="hourly-section">
+          <h2 class="section-title">Prévisions horaires</h2>
+          <app-hourly-forecast [forecasts]="dashboard.hourly"></app-hourly-forecast>
         </section>
 
+        <!-- 📊 Indicateurs (Grille propre à 4 éléments) -->
+        <section class="metrics-section">
+          <h2 class="section-title">Détails de la météo</h2>
+          <div class="metrics-grid">
+            <app-weather-metric-card
+              class="humidity"
+              icon="water-outline"
+              title="Humidité"
+              [value]="dashboard.current.humidity"
+              unit="%">
+            </app-weather-metric-card>
 
+            <app-weather-metric-card
+              class="wind"
+              icon="navigate-outline"
+              title="Vent"
+              [value]="dashboard.current.windSpeed"
+              unit="km/h">
+            </app-weather-metric-card>
 
+            <app-weather-metric-card
+              class="pressure"
+              icon="speedometer-outline"
+              title="Pression"
+              [value]="dashboard.current.pressure"
+              unit="hPa">
+            </app-weather-metric-card>
 
-        <!-- 📅 Prévisions -->
+            <app-weather-metric-card
+              class="uv"
+              icon="sunny-outline"
+              title="UV"
+              [value]="dashboard.current.uvIndex">
+            </app-weather-metric-card>
+          </div>
+        </section>
 
+        <!-- 📅 Prévisions Quotidiennes -->
         <section class="daily-section">
-
-
-          <app-daily-forecast
-
-            [forecasts]="dashboard.daily">
-
-          </app-daily-forecast>
-
-
+          <h2 class="section-title">Prévisions sur 7 jours</h2>
+          <app-daily-forecast [forecasts]="dashboard.daily"></app-daily-forecast>
         </section>
-
 
       </div>
 
-
     </app-weather-background>
-
-
   </ng-container>
-
-
 </ion-content>
