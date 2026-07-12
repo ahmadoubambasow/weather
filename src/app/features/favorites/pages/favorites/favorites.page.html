@@ -1,13 +1,74 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>favorites</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favorites</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="page">
+
+
+    <h1>
+
+      Mes favoris ⭐
+
+    </h1>
+
+
+
+    <div
+
+      class="favorite-card"
+
+      *ngFor="let city of favorites$ | async"
+
+    >
+
+
+      <div class="info">
+
+
+        <h2>
+
+          {{ city.name }}
+
+        </h2>
+
+
+        <p>
+
+          {{ city.region }}
+
+          -
+
+          {{ city.country }}
+
+        </p>
+
+
+      </div>
+
+
+
+      <button
+
+        class="delete"
+
+        (click)="remove(city)"
+
+      >
+
+        <ion-icon
+
+          name="trash-outline">
+
+        </ion-icon>
+
+
+      </button>
+
+
+
+    </div>
+
+
+  </div>
+
+
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -7,6 +7,7 @@ import {
   heartOutline,
   settingsOutline,
 } from 'ionicons/icons';
+import { SelectedLocationService } from './core/services/selected-location.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,10 @@ import {
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
+
+  private readonly selectedLocation =
+   inject(SelectedLocationService);
+
   constructor() {
 
     addIcons({
@@ -22,5 +27,7 @@ export class AppComponent {
       heartOutline,
       settingsOutline
     });
+
+    this.selectedLocation.restore();
   }
 }

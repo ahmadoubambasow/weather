@@ -16,36 +16,6 @@
 
 
 
-/*
-|--------------------------------------------------------------------------
-| Localisation
-|--------------------------------------------------------------------------
-*/
-
-.location {
-
-
-  display:flex;
-
-  align-items:center;
-
-  gap:6px;
-
-
-  font-size:16px;
-
-  font-weight:600;
-
-
-  color:
-
-    rgba(15,23,42,.75);
-
-
-}
-
-
-
 .location ion-icon {
 
 
@@ -182,5 +152,67 @@
 
     blur(10px);
 
+
+}
+
+.location-bar {
+
+  width:100%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+
+.favorite-button {
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#dadfe4;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  box-shadow:
+
+    0 4px 10px rgba(0,0,0,.08);
+
+}
+
+
+.favorite-button ion-icon {
+
+  font-size:24px;
+
+  color:#f59e0b;
+
+}
+
+
+
+.location {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  font-size:16px;
+
+  color:rgba(255,255,255,.85);
 
 }

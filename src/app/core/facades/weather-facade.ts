@@ -11,6 +11,7 @@ import { WeatherApiResponse } from '../models/api/weather-api-response.model';
 import { WeatherDashboardViewModel } from '../models/ui/weather-dashboard.viewmodel';
 import { HourlyWeatherMapper } from '../mappers/hourly-weather.mapper';
 import { DailyWeatherMarpper } from '../mappers/daily-weather.mapper';
+import { SelectedLocationService } from '../services/selected-location.service';
 
 /**
  * ============================================================
@@ -34,6 +35,9 @@ export class WeatherFacade {
   private readonly hourlyWeatherMapper = inject(HourlyWeatherMapper);
 
   private readonly dailyWeatherMapper = inject(DailyWeatherMarpper);
+
+  private readonly selectedLocation =
+  inject(SelectedLocationService);
 
   /**
    * Retourne la météo actuelle déjà transformée
@@ -62,13 +66,43 @@ export class WeatherFacade {
 
   getDashboard(): Observable<WeatherDashboardViewModel> {
 
-    return from(
+
+  return this.selectedLocation.location$.pipe(
+
+
+    switchMap(selected => {
+
+
+      /**
+       * Une ville a été choisie
+       */
+      if(selected){
+
+
+        return this.weatherService.getWeather(
+
+          selected.latitude,
+
+          selected.longitude
+
+        );
+
+
+      }
+
+
+      /**
+       * Sinon utilisation GPS
+       */
+      return from(
 
         this.geolocationService.getCurrentLocation()
 
       ).pipe(
 
+
         switchMap(location =>
+
 
           this.weatherService.getWeather(
 
@@ -78,33 +112,135 @@ export class WeatherFacade {
 
           )
 
-        ),
+        )
 
-        map(response => ({
+      );
 
-          current: this.currentWeatherMapper.toUiModel(
+
+    }),
+
+
+
+      map(response => {
+
+
+  const selected =
+    this.selectedLocation.current;
+
+
+
+  return {
+
+
+    current:
+
+      this.currentWeatherMapper.toUiModel(
+
+        response.current,
+
+        selected?.name ?? 'Ma position'
+
+      ),
+
+
+
+    hourly:
+
+      this.hourlyWeatherMapper.toUiModel(
+
+        response.hourly
+
+      ),
+
+
+
+    daily:
+
+      this.dailyWeatherMapper.toUiModel(
+
+        response.daily
+
+      )
+
+
+  };
+
+
+})
+
+
+  );
+
+
+}
+
+  /**
+ * ============================================================
+ * getDashboardByLocation
+ * ============================================================
+ *
+ * Charge la météo d'une localisation choisie
+ * par l'utilisateur.
+ *
+ * Utilisé par :
+ * SearchPage
+ */
+
+getDashboardByLocation(
+    latitude: number,
+    longitude: number,
+    locationName: string
+  ): Observable<WeatherDashboardViewModel> {
+
+
+    return this.weatherService.getWeather(
+
+      latitude,
+
+      longitude
+
+    ).pipe(
+
+
+      map(response => ({
+
+
+        current:
+
+          this.currentWeatherMapper.toUiModel(
 
             response.current,
 
-            'Ma position'
+            locationName
 
           ),
 
-          hourly: this.hourlyWeatherMapper.toUiModel(
+
+
+        hourly:
+
+          this.hourlyWeatherMapper.toUiModel(
 
             response.hourly
 
           ),
 
-          daily: this.dailyWeatherMapper.toUiModel(
+
+
+        daily:
+
+          this.dailyWeatherMapper.toUiModel(
 
             response.daily
 
           )
 
-        }))
 
-      );
+      }))
+
+
+    );
+
 
   }
 

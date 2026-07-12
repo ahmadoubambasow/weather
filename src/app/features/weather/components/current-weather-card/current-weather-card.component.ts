@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppCardComponent } from "../../../../shared/ui/app-card/app-card.component";
 import { CommonModule } from '@angular/common';
 import { IonIcon } from "@ionic/angular/standalone";
@@ -8,7 +8,8 @@ import { IonIcon } from "@ionic/angular/standalone";
   templateUrl: './current-weather-card.component.html',
   styleUrls: ['./current-weather-card.component.scss'],
   standalone: true,
-  imports: [IonIcon, 
+  imports: [
+    IonIcon, 
     CommonModule,
     AppCardComponent
   ],
@@ -29,6 +30,12 @@ export class CurrentWeatherCardComponent  implements OnInit {
 
   @Input()
   feelsLike = 0;
+
+  @Input()
+  isFavorite = false;
+
+  @Output()
+  favorite = new EventEmitter<void>();
 
   constructor() { }
 

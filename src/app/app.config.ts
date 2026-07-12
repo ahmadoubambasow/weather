@@ -11,6 +11,7 @@ export const appConfig: ApplicationConfig = {
     // Ionic
     provideIonicAngular(),
 
+
     // Routing
     provideRouter(routes, withPreloading(PreloadAllModules)),
 

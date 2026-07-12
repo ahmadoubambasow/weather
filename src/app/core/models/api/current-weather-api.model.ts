@@ -41,4 +41,12 @@ export interface CurrentWeatherApi {
 
   uv_index: number;
 
+  longitude: number;
+
+  latitude: number;
+
+  country?: string;
+
+  region?: string;
+
 }

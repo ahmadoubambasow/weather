@@ -3,12 +3,33 @@
   <div class="weather-card">
 
 
-    <!-- Localisation -->
-    <div class="location">
+    <!-- Header localisation + favori -->
+    <div class="location-bar">
 
-      <ion-icon name="location-outline"></ion-icon>
 
-      {{ location }}
+      <!-- Localisation -->
+      <div class="location">
+
+        <ion-icon name="location-outline"></ion-icon>
+
+        {{ location }}
+
+      </div>
+
+
+
+      <!-- Favori -->
+      <button
+        class="favorite-button"
+        (click)="favorite.emit()"
+      >
+
+        <ion-icon
+          [name]="isFavorite ? 'star' : 'star-outline'">
+        </ion-icon>
+
+      </button>
+
 
     </div>
 

@@ -1,20 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonIcon, IonSearchbar } from '@ionic/angular/standalone';
+
+import { FavoritesService } from 'src/app/core/services/favorites.service';
+import { WeatherLocation } from 'src/app/core/models/ui/weather-location.model';
+
 
 @Component({
+
   selector: 'app-favorites',
+
   templateUrl: './favorites.page.html',
+
   styleUrls: ['./favorites.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+
+  standalone:true,
+
+  imports:[
+
+    CommonModule,
+
+    IonContent,
+
+    IonIcon
+
+  ]
+
 })
-export class FavoritesPage implements OnInit {
+export class FavoritesPage {
 
-  constructor() { }
 
-  ngOnInit() {
+  private readonly favoritesService =
+    inject(FavoritesService);
+
+
+
+  favorites$ =
+    this.favoritesService.favorites$;
+
+
+
+  async remove(
+    location: WeatherLocation
+  ){
+
+    await this.favoritesService.remove(location);
+
   }
+
 
 }

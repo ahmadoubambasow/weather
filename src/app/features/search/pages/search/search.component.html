@@ -1,0 +1,51 @@
+<ion-content>
+
+  <div class="page">
+
+
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Rechercher une ville..."
+      [(ngModel)]="query"
+      (input)="search()"
+    >
+
+
+
+    <button
+      class="position-button"
+      (click)="useMyPosition()"
+    >
+
+      <ion-icon
+        name="locate-outline">
+      </ion-icon>
+
+
+      Ma position
+
+    </button>
+
+
+
+    <div
+      class="result"
+      *ngFor="let city of (results$ | async)"
+      (click)="selectCity(city)"
+    >
+
+      <h3>
+        {{ city.name }}
+      </h3>
+
+      <p>
+        {{ city.region }} - {{ city.country }}
+      </p>
+
+    </div>
+
+
+  </div>
+
+</ion-content>

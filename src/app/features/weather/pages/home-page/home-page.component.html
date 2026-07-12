@@ -11,7 +11,9 @@
             [temperature]="dashboard.current.temperature"
             [description]="dashboard.current.description"
             [feelsLike]="dashboard.current.feelsLike"
-            [icon]="dashboard.current.icon">
+            [icon]="dashboard.current.icon"
+            [isFavorite]="isFavorite(dashboard)"
+            (favorite)="addToFavorites(dashboard)">
           </app-current-weather-card>
         </section>
 

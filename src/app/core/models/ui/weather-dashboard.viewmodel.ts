@@ -1,6 +1,7 @@
 import { Weather } from './weather.model';
 import { HourlyForecast } from './hourly-forecast.model';
 import { DailyForecast } from './daily-forecast.model';
+import { WeatherLocation } from './weather-location.model';
 
 /**
  * ============================================================
@@ -27,5 +28,7 @@ export interface WeatherDashboardViewModel {
    * Prévisions journalières.
    */
   daily: DailyForecast[];
+
+  location?: WeatherLocation;
 
 }

@@ -55,6 +55,14 @@ export class CurrentWeatherMapper {
 
       weatherCode: api.weather_code,
 
+      latitude: api.latitude,
+
+      longitude: api.longitude,
+
+      country: api.country,
+
+      region: api.region,
+
       description: weatherInfo.description,
 
       icon: weatherInfo.icon,

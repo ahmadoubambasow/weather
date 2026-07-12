@@ -8,7 +8,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonTabButton, IonIcon, Ion
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonTabs, IonRouterOutlet, IonTabBar, IonLabel, IonIcon, IonTabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonTabs, IonRouterOutlet, IonTabBar, IonLabel, IonIcon, IonTabButton, CommonModule, FormsModule]
 })
 export class TabsPage implements OnInit {
 

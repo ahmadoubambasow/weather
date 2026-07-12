@@ -67,4 +67,18 @@ export interface Weather {
    */
   uvIndex: number;
 
+  /**
+   * latitude
+   */
+  latitude: number;
+
+  /**
+   * Longitude
+   */
+  longitude: number;
+
+  country?: string;
+
+  region?: string;
+
 }
