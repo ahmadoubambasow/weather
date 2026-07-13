@@ -3,19 +3,50 @@
   <div class="page">
 
 
-    <input
-      class="search-input"
-      type="text"
-      placeholder="Rechercher une ville..."
-      [(ngModel)]="query"
-      (input)="search()"
-    >
+    <div class="header">
+
+      <h1>
+        Trouver une ville
+      </h1>
+
+      <p>
+        Recherchez une localisation pour voir la météo
+      </p>
+
+    </div>
+
+
+
+    <div class="search-box">
+
+      <ion-icon
+        name="search-outline">
+      </ion-icon>
+
+
+      <input
+
+        type="text"
+
+        placeholder="Rechercher une ville..."
+
+        [(ngModel)]="query"
+
+        (input)="search()"
+
+      >
+
+    </div>
+
 
 
 
     <button
+
       class="position-button"
+
       (click)="useMyPosition()"
+
     >
 
       <ion-icon
@@ -23,29 +54,117 @@
       </ion-icon>
 
 
-      Ma position
+      Utiliser ma position
+
 
     </button>
 
 
 
+
+
     <div
-      class="result"
-      *ngFor="let city of (results$ | async)"
-      (click)="selectCity(city)"
+      class="results-title"
+      *ngIf="(results$ | async)?.length"
     >
 
-      <h3>
-        {{ city.name }}
-      </h3>
+      Résultats
+
+    </div>
+
+
+
+
+
+    <div
+
+      class="result"
+
+      *ngFor="let city of (results$ | async)"
+
+      (click)="selectCity(city)"
+
+    >
+
+
+      <div class="city-icon">
+
+        <ion-icon
+          name="location-outline">
+        </ion-icon>
+
+      </div>
+
+
+
+      <div class="city-info">
+
+
+        <h3>
+
+          {{city.name}}
+
+        </h3>
+
+
+        <p>
+
+          {{city.region}}
+
+          <span *ngIf="city.region">
+            -
+          </span>
+
+          {{city.country}}
+
+        </p>
+
+
+      </div>
+
+
+
+      <ion-icon
+
+        class="arrow"
+
+        name="chevron-forward-outline">
+
+      </ion-icon>
+
+
+
+    </div>
+
+
+
+
+    <div
+
+      class="empty"
+
+      *ngIf="query && !(results$ | async)?.length"
+
+    >
+
+      <ion-icon
+
+        name="search-outline">
+
+      </ion-icon>
+
 
       <p>
-        {{ city.region }} - {{ city.country }}
+
+        Aucune ville trouvée
+
       </p>
+
 
     </div>
 
 
   </div>
+
 
 </ion-content>

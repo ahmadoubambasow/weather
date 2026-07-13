@@ -1,25 +1,140 @@
-.search-input {
-  background: red;
-  height: 50px;
+ion-content {
+
+  --background:#f8fafc;
+
 }
 
-.position-button {
 
-  width:100%;
+.page {
 
-  margin-top:16px;
+  padding:24px;
 
-  padding:14px;
+}
 
-  border:none;
+
+
+/* HEADER */
+
+.header {
+
+
+  margin-bottom:24px;
+
+
+
+  h1 {
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#0f172a;
+
+  }
+
+
+
+  p {
+
+    margin-top:8px;
+
+    color:#64748b;
+
+    font-size:15px;
+
+  }
+
+
+}
+
+
+
+
+
+/* SEARCH */
+
+.search-box {
+
+
+  height:56px;
+
+
+  display:flex;
+
+  align-items:center;
+
+
+  gap:12px;
+
+
+  background:white;
+
+
+  padding:0 18px;
+
 
   border-radius:20px;
 
-  background:#2563eb;
 
-  color:white;
+  box-shadow:
 
-  font-size:16px;
+  0 8px 20px rgba(0,0,0,.08);
+
+
+
+  ion-icon {
+
+    font-size:22px;
+
+    color:#64748b;
+
+  }
+
+
+
+  input {
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+
+    font-size:16px;
+
+
+    color:#0f172a;
+
+
+  }
+
+
+}
+
+
+
+
+/* GPS BUTTON */
+
+.position-button {
+
+
+  margin-top:18px;
+
+
+  width:100%;
+
+  height:54px;
+
+
+  border-radius:20px;
+
+
+  border:none;
+
 
   display:flex;
 
@@ -27,6 +142,175 @@
 
   align-items:center;
 
-  gap:8px;
+
+  gap:10px;
+
+
+  background:#2563eb;
+
+
+  color:white;
+
+
+  font-size:16px;
+
+  font-weight:600;
+
+
+}
+
+
+
+/* TITLE */
+
+.results-title {
+
+
+  margin:
+
+  28px 0 12px;
+
+
+  font-weight:700;
+
+  color:#334155;
+
+
+}
+
+
+
+
+/* CARD RESULT */
+
+.result {
+
+
+  display:flex;
+
+
+  align-items:center;
+
+
+  gap:14px;
+
+
+  background:white;
+
+
+  padding:16px;
+
+
+  margin-bottom:12px;
+
+
+  border-radius:20px;
+
+
+  box-shadow:
+
+  0 6px 16px rgba(0,0,0,.06);
+
+
+
+  .city-icon {
+
+
+    width:42px;
+
+    height:42px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    background:#dbeafe;
+
+
+
+    ion-icon {
+
+      color:#2563eb;
+
+      font-size:22px;
+
+    }
+
+
+  }
+
+
+
+
+  .city-info {
+
+
+    flex:1;
+
+
+    h3 {
+
+      margin:0;
+
+      font-size:17px;
+
+      font-weight:700;
+
+    }
+
+
+
+    p {
+
+      margin:5px 0 0;
+
+      color:#64748b;
+
+      font-size:14px;
+
+    }
+
+
+  }
+
+
+
+
+  .arrow {
+
+    color:#94a3b8;
+
+  }
+
+
+
+}
+
+
+
+.empty {
+
+
+  text-align:center;
+
+  margin-top:40px;
+
+  color:#94a3b8;
+
+
+
+  ion-icon {
+
+    font-size:40px;
+
+  }
+
 
 }
