@@ -1,8 +1,64 @@
 :host {
-  &.humidity { .icon-box { ion-icon { color: #0ea5e9; } } }
-  &.wind     { .icon-box { ion-icon { color: #22c55e; } } }
-  &.pressure { .icon-box { ion-icon { color: #8b5cf6; } } }
-  &.uv       { .icon-box { ion-icon { color: #f59e0b; } } }
+
+  display:block;
+
+  height:100%;
+
+
+  &.humidity {
+    .icon-box ion-icon {
+      color:#0ea5e9;
+    }
+  }
+
+  &.wind {
+    .icon-box ion-icon {
+      color:#22c55e;
+    }
+  }
+
+  &.pressure {
+    .icon-box ion-icon {
+      color:#8b5cf6;
+    }
+  }
+
+  &.uv {
+    .icon-box ion-icon {
+      color:#f59e0b;
+    }
+  }
+
+}
+
+
+.weather-content {
+
+  --background: transparent;
+
+}
+
+
+
+.page {
+
+  min-height:100%;
+
+  padding:
+
+    24px
+
+    16px
+
+    calc(80px + env(safe-area-inset-bottom));
+
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:28px;
+
 }
 
 .page {

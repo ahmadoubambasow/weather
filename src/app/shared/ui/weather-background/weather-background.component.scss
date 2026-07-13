@@ -1,14 +1,22 @@
+:host {
+
+  display:block;
+
+  min-height:100%;
+
+}
+
 .background {
 
   position: relative;
 
-  min-height: 100vh;
+  min-height: 100%;
 
-  width: 100%;
+  width:100%;
 
-  overflow: hidden;
+  overflow: visible;
 
-  color: white;
+  color:rgb(151, 166, 175);
 
   transition:
     background 1s ease,
