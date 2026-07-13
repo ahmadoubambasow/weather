@@ -1,22 +1,24 @@
-<ion-content>
+<ion-content fullscreen>
 
   <div class="page">
 
 
+    <!-- HEADER -->
     <div class="header">
 
       <h1>
-        Trouver une ville
+        Rechercher une ville
       </h1>
 
       <p>
-        Recherchez une localisation pour voir la météo
+        Trouvez une localisation pour voir la météo
       </p>
 
     </div>
 
 
 
+    <!-- SEARCH BOX -->
     <div class="search-box">
 
       <ion-icon
@@ -25,36 +27,34 @@
 
 
       <input
-
         type="text"
-
         placeholder="Rechercher une ville..."
-
         [(ngModel)]="query"
-
         (input)="search()"
-
       >
 
     </div>
 
 
 
-
+    <!-- POSITION -->
     <button
-
       class="position-button"
-
       (click)="useMyPosition()"
-
     >
 
-      <ion-icon
-        name="locate-outline">
-      </ion-icon>
+      <div class="icon">
+
+        <ion-icon
+          name="locate-outline">
+        </ion-icon>
+
+      </div>
 
 
-      Utiliser ma position
+      <span>
+        Utiliser ma position
+      </span>
 
 
     </button>
@@ -62,106 +62,80 @@
 
 
 
+    <!-- RESULTS -->
 
     <div
-      class="results-title"
+      class="results-container"
       *ngIf="(results$ | async)?.length"
     >
 
-      Résultats
 
-    </div>
-
-
-
+      <h2>
+        Résultats
+      </h2>
 
 
-    <div
 
-      class="result"
+      <div
 
-      *ngFor="let city of (results$ | async)"
+        class="city-card"
 
-      (click)="selectCity(city)"
+        *ngFor="let city of (results$ | async)"
 
-    >
+        (click)="selectCity(city)"
+
+      >
 
 
-      <div class="city-icon">
+        <div class="city-icon">
+
+          <ion-icon
+            name="location-outline">
+          </ion-icon>
+
+        </div>
+
+
+
+        <div class="city-info">
+
+
+          <h3>
+            {{ city.name }}
+          </h3>
+
+
+          <p>
+
+            {{ city.region }}
+
+            <span *ngIf="city.region">
+              -
+            </span>
+
+            {{ city.country }}
+
+          </p>
+
+
+        </div>
+
+
 
         <ion-icon
-          name="location-outline">
+
+          class="arrow"
+
+          name="chevron-forward-outline">
+
         </ion-icon>
 
-      </div>
-
-
-
-      <div class="city-info">
-
-
-        <h3>
-
-          {{city.name}}
-
-        </h3>
-
-
-        <p>
-
-          {{city.region}}
-
-          <span *ngIf="city.region">
-            -
-          </span>
-
-          {{city.country}}
-
-        </p>
-
 
       </div>
 
 
-
-      <ion-icon
-
-        class="arrow"
-
-        name="chevron-forward-outline">
-
-      </ion-icon>
-
-
-
     </div>
 
-
-
-
-    <div
-
-      class="empty"
-
-      *ngIf="query && !(results$ | async)?.length"
-
-    >
-
-      <ion-icon
-
-        name="search-outline">
-
-      </ion-icon>
-
-
-      <p>
-
-        Aucune ville trouvée
-
-      </p>
-
-
-    </div>
 
 
   </div>

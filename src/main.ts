@@ -7,6 +7,7 @@ import { locationOutline, star, starOutline, trashOutline } from 'ionicons/icons
 addIcons({
 
   'trash-outline': trashOutline,
+  'locate-outline': locationOutline,
 
   star,
 
