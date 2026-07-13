@@ -40,6 +40,7 @@ import { AppSettings } from 'src/app/core/models/ui/settings.model';
 export class SettingsPage {
 
 
+  settings!: AppSettings;
 
   private readonly settingsService =
     inject(SettingsService);
@@ -49,6 +50,14 @@ export class SettingsPage {
   settings$ =
     this.settingsService.settings$;
 
+
+  constructor() {
+
+    this.settingsService.settings$.subscribe(value => {
+
+      this.settings = value;
+    });
+  }
 
 
   /**
@@ -66,6 +75,55 @@ export class SettingsPage {
 
   }
 
+  updateTemperature(value:
+    'celsius'|'fahrenheit'):void{
 
 
+    this.settingsService.update({
+
+    temperatureUnit:value
+
+    });
+
+
+  }
+
+
+  updateWind(value:
+    'kmh'|'mph'):void{
+
+
+    this.settingsService.update({
+
+    windUnit:value
+
+    });
+
+
+  }
+
+
+  updateAutoLocation(value:boolean):void{
+
+
+    this.settingsService.update({
+
+    autoLocation:value
+
+    });
+
+
+  }
+
+  updateWindUnit(
+    value:'kmh'|'mph'
+  ):void {
+
+    this.settingsService.update({
+
+      windUnit:value
+
+    });
+
+  }
 }

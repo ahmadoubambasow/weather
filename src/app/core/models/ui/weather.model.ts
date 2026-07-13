@@ -37,6 +37,8 @@ export interface Weather {
    */
   windSpeed: number;
 
+  windUnit: 'kmh' | 'mph';
+
   /**
    * Code météo Open-Meteo.
    */

@@ -109,6 +109,7 @@ export class SettingsService {
     settings: Partial<AppSettings>
   ): Promise<void>{
 
+    console.log('Nouveaux réglages:', settings);
 
     const current =
       this.settingsSubject.value;
@@ -125,7 +126,7 @@ export class SettingsService {
 
     };
 
-
+    console.log('Sttings final:', updated);
 
     this.settingsSubject.next(updated);
 

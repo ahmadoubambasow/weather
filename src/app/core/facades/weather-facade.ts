@@ -1,61 +1,173 @@
-import { CurrentWeatherMapper } from '../mappers/current-weather.mapper';
-
 import { Injectable, inject } from '@angular/core';
-import { from, switchMap, map, Observable } from 'rxjs';
+import {
+  Observable,
+  from,
+  switchMap,
+  map,
+  combineLatest
+} from 'rxjs';
+
+import { CurrentWeatherMapper } from '../mappers/current-weather.mapper';
+import { HourlyWeatherMapper } from '../mappers/hourly-weather.mapper';
+import { DailyWeatherMarpper } from '../mappers/daily-weather.mapper';
 
 import { GeolocationService } from '../services/geolocation';
 import { WeatherService } from '../services/weather.service';
+import { SelectedLocationService } from '../services/selected-location.service';
+import { SettingsService } from '../services/settings.service';
 
 import { Weather } from '../models/ui/weather.model';
 import { WeatherApiResponse } from '../models/api/weather-api-response.model';
 import { WeatherDashboardViewModel } from '../models/ui/weather-dashboard.viewmodel';
-import { HourlyWeatherMapper } from '../mappers/hourly-weather.mapper';
-import { DailyWeatherMarpper } from '../mappers/daily-weather.mapper';
-import { SelectedLocationService } from '../services/selected-location.service';
+import { AppSettings } from '../models/ui/settings.model';
 
-/**
- * ============================================================
- * WeatherFacade
- * ============================================================
- *
- * Point d'entrée unique pour l'UI.
- * Elle orchestre service + mappers.
- */
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherFacade {
 
-  private readonly geolocationService = inject(GeolocationService);
+  private readonly geolocationService =
+    inject(GeolocationService);
 
-  private readonly weatherService = inject(WeatherService);
+  private readonly weatherService =
+    inject(WeatherService);
 
-  private readonly currentWeatherMapper = inject(CurrentWeatherMapper);
+  private readonly currentWeatherMapper =
+    inject(CurrentWeatherMapper);
 
-  private readonly hourlyWeatherMapper = inject(HourlyWeatherMapper);
+  private readonly hourlyWeatherMapper =
+    inject(HourlyWeatherMapper);
 
-  private readonly dailyWeatherMapper = inject(DailyWeatherMarpper);
+  private readonly dailyWeatherMapper =
+    inject(DailyWeatherMarpper);
 
   private readonly selectedLocation =
-  inject(SelectedLocationService);
+    inject(SelectedLocationService);
+
+  private readonly settingsService =
+    inject(SettingsService);
 
   /**
-   * Retourne la météo actuelle déjà transformée
-   * pour l'interface utilisateur.
+   * ============================================================
+   * Météo actuelle
+   * ============================================================
    */
   getCurrentWeather(
     latitude: number,
     longitude: number
   ): Observable<Weather> {
 
-    return this.weatherService.getWeather(latitude, longitude).pipe(
+    return this.settingsService.settings$.pipe(
 
-      map((response: WeatherApiResponse) => {
+      switchMap(settings =>
 
-        // On transforme uniquement la partie "current"
-        return this.currentWeatherMapper.toUiModel(
-          response.current,
-          'Dakar' 
+        this.weatherService.getWeather(
+          latitude,
+          longitude
+        ).pipe(
+
+          map((response: WeatherApiResponse) =>
+
+            this.currentWeatherMapper.toUiModel(
+              response.current,
+              'Dakar',
+              settings
+            )
+
+          )
+
+        )
+
+      )
+
+    );
+
+  }
+
+  /**
+   * ============================================================
+   * Dashboard principal
+   * ============================================================
+   */
+  getDashboard(): Observable<WeatherDashboardViewModel> {
+
+    return combineLatest([
+
+      this.selectedLocation.location$,
+
+      this.settingsService.settings$
+
+    ]).pipe(
+
+      switchMap(([selected, settings]) => {
+
+        console.log('Weatherfacade settings :', settings);
+        console.log('Weatherfacade location :', selected);
+
+        if (selected) {
+
+          return this.weatherService.getWeather(
+            selected.latitude,
+            selected.longitude
+          ).pipe(
+
+            map(response => this.buildDashboard(
+
+              response,
+
+              settings,
+
+              selected.name,
+
+              selected.country,
+
+              selected.region,
+
+              selected.latitude,
+
+              selected.longitude
+
+            ))
+
+          );
+
+        }
+
+        return from(
+
+          this.geolocationService.getCurrentLocation()
+
+        ).pipe(
+
+          switchMap(position =>
+
+            this.weatherService.getWeather(
+              position.latitude,
+              position.longitude
+            ).pipe(
+
+              map(response => this.buildDashboard(
+
+                response,
+
+                settings,
+
+                'Ma position',
+
+                '',
+
+                '',
+
+                position.latitude,
+
+                position.longitude
+
+              ))
+
+            )
+
+          )
+
         );
 
       })
@@ -64,201 +176,113 @@ export class WeatherFacade {
 
   }
 
-  getDashboard(): Observable<WeatherDashboardViewModel> {
+  /**
+   * ============================================================
+   * Dashboard d'une ville choisie
+   * ============================================================
+   */
+  getDashboardByLocation(
+    latitude: number,
+    longitude: number,
+    locationName: string,
+    country: string,
+    region: string
+  ): Observable<WeatherDashboardViewModel> {
 
+    return this.settingsService.settings$.pipe(
 
-  return this.selectedLocation.location$.pipe(
+      switchMap(settings =>
 
+        this.weatherService.getWeather(
+          latitude,
+          longitude
+        ).pipe(
 
-    switchMap(selected => {
+          map(response => this.buildDashboard(
 
+            response,
 
-      /**
-       * Une ville a été choisie
-       */
-      if(selected){
+            settings,
 
+            locationName,
 
-        return this.weatherService.getWeather(
+            country,
 
-          selected.latitude,
+            region,
 
-          selected.longitude
+            latitude,
 
-        );
+            longitude
 
-
-      }
-
-
-      /**
-       * Sinon utilisation GPS
-       */
-      return from(
-
-        this.geolocationService.getCurrentLocation()
-
-      ).pipe(
-
-
-        switchMap(location =>
-
-
-          this.weatherService.getWeather(
-
-            location.latitude,
-
-            location.longitude
-
-          )
+          ))
 
         )
 
-      );
+      )
 
+    );
 
-    }),
+  }
 
+  /**
+   * ============================================================
+   * Construction du Dashboard
+   * ============================================================
+   */
+  private buildDashboard(
+    response: WeatherApiResponse,
+    settings: AppSettings,
+    name: string,
+    country: string,
+    region: string,
+    latitude: number,
+    longitude: number
+  ): WeatherDashboardViewModel {
 
+    return {
 
-      map(response => {
-
-
-  const selected =
-    this.selectedLocation.current;
-
-
-
-  return {
-
-
-    current:
-
-      this.currentWeatherMapper.toUiModel(
+      current: this.currentWeatherMapper.toUiModel(
 
         response.current,
 
-        selected?.name ?? 'Ma position'
+        name,
+
+        settings
 
       ),
 
+      hourly: this.hourlyWeatherMapper.toUiModel(
 
+        response.hourly,
 
-    hourly:
-
-      this.hourlyWeatherMapper.toUiModel(
-
-        response.hourly
+        settings
 
       ),
 
+      daily: this.dailyWeatherMapper.toUiModel(
 
+        response.daily,
 
-    daily:
-
-      this.dailyWeatherMapper.toUiModel(
-
-        response.daily
+        settings
 
       ),
-
-      location: selected ?? undefined
-
-
-  };
-
-
-})
-
-
-  );
-
-
-}
-
-  /**
- * ============================================================
- * getDashboardByLocation
- * ============================================================
- *
- * Charge la météo d'une localisation choisie
- * par l'utilisateur.
- *
- * Utilisé par :
- * SearchPage
- */
-
-getDashboardByLocation(
-  latitude: number,
-  longitude: number,
-  locationName: string,
-  country: string,
-  region: string
-): Observable<WeatherDashboardViewModel> {
-
-
-  return this.weatherService.getWeather(
-
-    latitude,
-
-    longitude
-
-  ).pipe(
-
-
-    map(response => ({
-
-
-      current:
-
-        this.currentWeatherMapper.toUiModel(
-
-          response.current,
-
-          locationName
-
-        ),
-
-
-      hourly:
-
-        this.hourlyWeatherMapper.toUiModel(
-
-          response.hourly
-
-        ),
-
-
-      daily:
-
-        this.dailyWeatherMapper.toUiModel(
-
-          response.daily
-
-        ),
-
 
       location: {
 
-        name: locationName,
-
-        latitude,
-
-        longitude,
+        name,
 
         country,
 
-        region
+        region,
+
+        latitude,
+
+        longitude
 
       }
 
+    };
 
-    }))
-
-
-  );
-
-
-}
+  }
 
 }

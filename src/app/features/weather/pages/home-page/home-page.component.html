@@ -40,7 +40,7 @@
               icon="navigate-outline"
               title="Vent"
               [value]="dashboard.current.windSpeed"
-              unit="km/h">
+              [unit]="dashboard.current.windUnit === 'kmh' ? 'km/h' : 'mph'">
             </app-weather-metric-card>
 
             <app-weather-metric-card

@@ -4,6 +4,7 @@ import { CurrentWeatherApi } from '../models/api/current-weather-api.model';
 
 import { Weather } from '../models/ui/weather.model';
 import { WeatherCodeService } from '../services/weather-code';
+import { AppSettings } from '../models/ui/settings.model';
 
 
 /**
@@ -31,8 +32,10 @@ export class CurrentWeatherMapper {
    */
   toUiModel(
     api: CurrentWeatherApi,
-    location: string
+    location: string,
+    settings: AppSettings
   ): Weather {
+
 
     const weatherInfo =
       this.weatherCodeService.get(api.weather_code);
@@ -41,15 +44,26 @@ export class CurrentWeatherMapper {
 
       location,
 
-      temperature: api.temperature_2m,
+      temperature: this.convertTemperature(
+        api.temperature_2m,
+        settings.temperatureUnit
+      ),
 
-      feelsLike: api.apparent_temperature,
+      feelsLike: this.convertTemperature(
+        api.apparent_temperature,
+        settings.temperatureUnit
+      ),
 
       humidity: api.relative_humidity_2m,
 
       pressure: api.surface_pressure,
 
-      windSpeed: api.wind_speed_10m,
+      windSpeed: this.convertWind(
+        api.wind_speed_10m,
+        settings.windUnit
+      ),
+
+      windUnit: settings.windUnit, 
 
       uvIndex: api.uv_index,
 
@@ -72,6 +86,57 @@ export class CurrentWeatherMapper {
       animation: weatherInfo.animation
 
     };
+
+  }
+
+
+  private convertTemperature(
+  value:number,
+  unit:'celsius'|'fahrenheit'
+  ):number {
+
+
+  if(unit==='fahrenheit'){
+
+  return Number(
+  (value * 9 / 5 + 32)
+  .toFixed(1)
+  );
+
+  }
+
+
+  return Number(
+  value.toFixed(1)
+  );
+
+
+  }
+
+
+  private convertWind(
+    speed:number,
+    unit:'kmh'|'mph'
+  ):number {
+
+
+    if(unit === 'mph') {
+
+      const result = Number(
+        (speed * 0.621371).toFixed(1)
+      );
+
+
+
+
+      return result;
+
+    }
+
+
+    return Number(
+      speed.toFixed(1)
+    );
 
   }
 

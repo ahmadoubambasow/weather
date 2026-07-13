@@ -110,8 +110,6 @@
 
 
 
-
-
     <div class="row">
 
 
@@ -136,9 +134,8 @@
 
         [ngModel]="settings.windUnit"
 
-        (ngModelChange)="update({
-          windUnit:$event
-        })"
+        (ngModelChange)="updateWindUnit($event)"
+        
 
       >
 

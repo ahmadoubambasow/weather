@@ -55,35 +55,7 @@ export class HomePage implements OnInit {
     private readonly weatherFacade: WeatherFacade
   ) {
 
-    this.dashboard$ = this.selectedLocation.location$.pipe(
-
-      switchMap(location => {
-
-        console.log('Location reçu dans homepage:', location);
-
-        if (location) {
-
-          return this.weatherFacade.getDashboardByLocation(
-
-            location.latitude,
-
-            location.longitude,
-
-            location.name,
-
-            location.country,
-
-            location.region
-
-          );
-
-        }
-
-        return this.weatherFacade.getDashboard();
-
-      })
-
-    );
+    this.dashboard$ = this.weatherFacade.getDashboard();
 
   }
 

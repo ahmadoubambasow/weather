@@ -1,109 +1,72 @@
 import { Injectable } from '@angular/core';
 
 import { HourlyWeatherApi } from '../models/api/hourly-weather-api.model';
-
 import { HourlyForecast } from '../models/ui/hourly-forecast.model';
-
+import { AppSettings } from '../models/ui/settings.model';
 
 /**
  * ============================================================
  * HourlyWeatherMapper
  * ============================================================
- *
- * Transforme les données horaires Open-Meteo
- * en données utilisables par l'interface.
- *
- * API :
- *
- * time:[]
- * temperature_2m:[]
- * weather_code:[]
- *
- *
- * UI :
- *
- * [
- *   {
- *    time,
- *    temperature,
- *    weatherCode
- *   }
- * ]
- *
- * ============================================================
  */
 
-
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
 export class HourlyWeatherMapper {
 
-
-
   /**
-   * Conversion API → UI
+   * API -> UI
    */
   toUiModel(
-
-    api: HourlyWeatherApi
-
+    api: HourlyWeatherApi,
+    settings: AppSettings
   ): HourlyForecast[] {
 
+    return api.time.map((time, index) => ({
 
-    return api.time.map(
+      /**
+       * Heure
+       */
+      time: new Date(time).toLocaleTimeString(
+        'fr-FR',
+        {
+          hour: '2-digit',
+          minute: '2-digit'
+        }
+      ),
 
-      (time,index)=>{
+      /**
+       * Température
+       */
+      temperature: this.convertTemperature(
+        api.temperature_2m[index],
+        settings.temperatureUnit
+      ),
 
+      /**
+       * Code météo
+       */
+      weatherCode: api.weather_code[index]
 
-        return {
-
-
-          /**
-           * Heure affichée
-           */
-          time:
-
-            new Date(time)
-            .toLocaleTimeString(
-
-              'fr-FR',
-
-              {
-                hour:'2-digit',
-                minute:'2-digit'
-              }
-
-            ),
-
-
-
-          /**
-           * Température associée
-           */
-          temperature:
-
-            api.temperature_2m[index],
-
-
-
-          /**
-           * Code météo
-           */
-          weatherCode:
-
-            api.weather_code[index]
-
-
-        };
-
-
-      }
-
-    );
-
+    }));
 
   }
 
+  /**
+   * Conversion °C -> °F
+   */
+  private convertTemperature(
+    value: number,
+    unit: 'celsius' | 'fahrenheit'
+  ): number {
+
+    if (unit === 'fahrenheit') {
+      return Math.round((value * 9) / 5 + 32);
+    }
+
+    return Math.round(value);
+
+  }
 
 }
