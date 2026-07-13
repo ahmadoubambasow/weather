@@ -59,6 +59,8 @@ export class HomePage implements OnInit {
 
       switchMap(location => {
 
+        console.log('Location reçu dans homepage:', location);
+
         if (location) {
 
           return this.weatherFacade.getDashboardByLocation(
@@ -67,7 +69,11 @@ export class HomePage implements OnInit {
 
             location.longitude,
 
-            location.name
+            location.name,
+
+            location.country,
+
+            location.region
 
           );
 
@@ -91,47 +97,30 @@ export class HomePage implements OnInit {
    * Vérifie si la météo affichée est dans les favoris
    */
   isFavorite(
-    dashboard: WeatherDashboardViewModel
-  ): boolean {
+  dashboard: WeatherDashboardViewModel
+): boolean {
 
-    return this.favoritesService.isFavorite({
-
-      name: dashboard.current.location,
-
-      latitude: dashboard.current.latitude,
-
-      longitude: dashboard.current.longitude,
-
-      country: dashboard.current.country ?? '',
-
-      region: dashboard.current.region ?? ''
-
-    });
-
+  if (!dashboard.location) {
+    return false;
   }
 
+  return this.favoritesService.isFavorite(
+    dashboard.location
+  );
+
+}
   /**
    * Ajoute ou retire des favoris
    */
   async addToFavorites(
     dashboard: WeatherDashboardViewModel
   ): Promise<void> {
+    
+    if (!dashboard.location) {
+      return;
+    }
 
-    const location: WeatherLocation = {
-
-      name: dashboard.current.location,
-
-      latitude: dashboard.current.latitude,
-
-      longitude: dashboard.current.longitude,
-
-      country: dashboard.current.country ?? '',
-
-      region: dashboard.current.region ?? ''
-
-    };
-
-    await this.favoritesService.toggle(location);
+    await this.favoritesService.toggle(dashboard.location);
 
   }
 

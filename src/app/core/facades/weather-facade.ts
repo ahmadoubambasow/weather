@@ -160,7 +160,9 @@ export class WeatherFacade {
 
         response.daily
 
-      )
+      ),
+
+      location: selected ?? undefined
 
 
   };
@@ -187,61 +189,76 @@ export class WeatherFacade {
  */
 
 getDashboardByLocation(
-    latitude: number,
-    longitude: number,
-    locationName: string
-  ): Observable<WeatherDashboardViewModel> {
+  latitude: number,
+  longitude: number,
+  locationName: string,
+  country: string,
+  region: string
+): Observable<WeatherDashboardViewModel> {
 
 
-    return this.weatherService.getWeather(
+  return this.weatherService.getWeather(
 
-      latitude,
+    latitude,
 
-      longitude
+    longitude
 
-    ).pipe(
-
-
-      map(response => ({
+  ).pipe(
 
 
-        current:
-
-          this.currentWeatherMapper.toUiModel(
-
-            response.current,
-
-            locationName
-
-          ),
+    map(response => ({
 
 
+      current:
 
-        hourly:
+        this.currentWeatherMapper.toUiModel(
 
-          this.hourlyWeatherMapper.toUiModel(
+          response.current,
 
-            response.hourly
+          locationName
 
-          ),
-
-
-
-        daily:
-
-          this.dailyWeatherMapper.toUiModel(
-
-            response.daily
-
-          )
+        ),
 
 
-      }))
+      hourly:
+
+        this.hourlyWeatherMapper.toUiModel(
+
+          response.hourly
+
+        ),
 
 
-    );
+      daily:
+
+        this.dailyWeatherMapper.toUiModel(
+
+          response.daily
+
+        ),
 
 
-  }
+      location: {
+
+        name: locationName,
+
+        latitude,
+
+        longitude,
+
+        country,
+
+        region
+
+      }
+
+
+    }))
+
+
+  );
+
+
+}
 
 }
