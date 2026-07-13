@@ -63,7 +63,7 @@
 
   background:
 
-    rgba(37,99,235,.08);
+    var(--color-surface);
 
 
 }
@@ -81,7 +81,7 @@ h2 {
   font-weight:800;
 
 
-  color:#0f172a;
+  color: var(--color-text);
 
 
 }
@@ -189,7 +189,7 @@ h2 {
   font-weight:800;
 
 
-  color:#0f172a;
+  color:#162e66;
 
 
 }

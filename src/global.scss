@@ -42,3 +42,80 @@ ion-content {
   --padding-bottom:56px;
 
 }
+
+:root {
+
+
+  --color-background:#f8fafc;
+
+  --color-surface:#ffffff;
+
+  --color-text:#0f172a;
+
+  --color-text-secondary:#64748b;
+
+  --color-border:#e5e7eb;
+
+
+  --color-primary:#2563eb;
+
+
+  --shadow-card:
+    0 8px 25px rgba(0,0,0,.08);
+
+
+}
+
+body.dark {
+
+
+  --color-background:#020617;
+
+
+  --color-surface:#0f172a;
+
+
+  --color-text:#f8fafc;
+
+
+  --color-text-secondary:#94a3b8;
+
+
+  --color-border:#1e293b;
+
+
+  --shadow-card:
+    0 8px 25px rgba(0,0,0,.4);
+
+
+  
+  ion-content {
+
+    --background:
+      var(--color-background);
+
+  }
+
+
+
+  ion-tab-bar {
+
+    --background:
+      var(--color-surface);
+
+    --color:
+      var(--color-text-secondary);
+
+  }
+
+
+
+  ion-label {
+
+    color:
+      var(--color-text);
+
+  }
+
+
+}

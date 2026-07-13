@@ -40,7 +40,7 @@ ion-content {
 
     font-weight:800;
 
-    color:#0f172a;
+    color: var(--color-text);
 
   }
 
@@ -226,7 +226,7 @@ ion-content {
 
     margin-bottom:14px;
 
-    color:#0f172a;
+    color: var(--color-text);
 
 
   }
@@ -327,7 +327,7 @@ ion-content {
 
     font-weight:700;
 
-    color:#0f172a;
+    color: var(--color-text-secondary);
 
   }
 

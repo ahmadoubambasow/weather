@@ -21,12 +21,17 @@
 
   font-size:20px;
 
-  color:#2563eb;
 
+  color: var(--color-primary);
 
 }
 
+.location span {
 
+
+  color: var(--color-text);
+
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +80,7 @@
   letter-spacing:-3px;
 
 
-  color:#0f172a;
+  color: var(--color-primary);
 
 
 

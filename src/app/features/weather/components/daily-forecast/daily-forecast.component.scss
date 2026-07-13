@@ -20,7 +20,7 @@ h2 {
 
   font-weight:800;
 
-  color:#0f172a;
+  color: var(--color-text);
 
 }
 
@@ -78,7 +78,7 @@ h2 {
 
   text-transform:capitalize;
 
-  color:#334155;
+  color: var(--color-text-secondary);
 
 }
 
@@ -119,6 +119,7 @@ padding-left:10px;
   justify-content:center;
 
   width:38px;
+  
 
 }
 
@@ -171,6 +172,7 @@ align-items:center;
 
 gap:10px;
 
+color: var(--color-text-secondary);
 
 }
 
@@ -239,7 +241,7 @@ linear-gradient(
 
   font-weight:900;
 
-  color:#0f172a;
+  color: var(--color-text-secondary);
 
 }
 

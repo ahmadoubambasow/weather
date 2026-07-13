@@ -1,0 +1,276 @@
+.page {
+
+  padding:24px 16px;
+
+}
+
+
+
+/*
+HEADER
+*/
+
+.header {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  margin-bottom:28px;
+
+}
+
+
+
+.header-icon {
+
+
+  width:56px;
+
+  height:56px;
+
+  border-radius:18px;
+
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+
+  background:#2563eb;
+
+  color:white;
+
+
+}
+
+
+
+.header-icon ion-icon {
+
+  font-size:30px;
+
+}
+
+
+
+.header h1 {
+
+color: var(--color-text);
+
+  margin:0;
+
+  font-size:28px;
+
+  font-weight:800;
+
+}
+
+
+
+.header p {
+
+  margin:5px 0 0;
+
+  color:#64748b;
+
+}
+
+
+
+
+
+/*
+CARDS
+*/
+
+
+.card {
+
+
+  background:white;
+
+
+  border-radius:22px;
+
+
+  padding:20px;
+
+
+  margin-bottom:18px;
+
+
+  box-shadow:
+
+  0 8px 25px rgba(0,0,0,.08);
+
+
+}
+
+
+
+.card h2 {
+
+
+  margin:0 0 18px;
+
+
+  font-size:18px;
+
+
+  font-weight:800;
+
+
+  color:#0f172a;
+
+
+}
+
+
+
+
+
+/*
+ROWS
+*/
+
+
+.row {
+
+
+  display:flex;
+
+
+  justify-content:space-between;
+
+
+  align-items:center;
+
+
+  padding:14px 0;
+
+
+  border-bottom:
+
+  1px solid #e5e7eb;
+
+
+}
+
+
+
+.row:last-child {
+
+  border-bottom:none;
+
+}
+
+
+
+.label {
+
+
+  display:flex;
+
+
+  align-items:center;
+
+
+  gap:12px;
+
+
+  color:#334155;
+
+
+  font-weight:600;
+
+
+}
+
+
+
+.label ion-icon {
+
+
+  font-size:22px;
+
+  color:#2563eb;
+
+
+}
+
+
+
+
+
+select {
+
+
+  border:none;
+
+
+  background:#f1f5f9;
+
+
+  padding:8px 12px;
+
+
+  border-radius:12px;
+
+
+  font-weight:600;
+
+
+  color:#334155;
+
+
+}
+
+
+
+
+
+/*
+ABOUT
+*/
+
+
+.about .info {
+
+
+  display:flex;
+
+
+  justify-content:space-between;
+
+
+  padding:12px 0;
+
+
+  color:#64748b;
+
+
+}
+
+
+
+.version {
+
+
+  text-align:center;
+
+
+  margin-top:30px;
+
+
+  color:#94a3b8;
+
+
+  font-size:14px;
+
+
+}

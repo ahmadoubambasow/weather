@@ -40,7 +40,7 @@ ion-content {
 
     font-weight:800;
 
-    color:#0f172a;
+    color: var(--color-text);
 
   }
 
@@ -50,7 +50,7 @@ ion-content {
 
     margin-top:8px;
 
-    color:#64748b;
+    color: var(--color-text-secondary);
 
     font-size:15px;
 
@@ -89,7 +89,9 @@ ion-content {
   padding:18px;
 
 
-  background:white;
+  background:var(--color-surface);
+
+  box-shadow:var(--shadow-card);
 
 
   border-radius:22px;
@@ -177,7 +179,7 @@ ion-content {
 
     font-weight:750;
 
-    color:#0f172a;
+    color: var(--color-text);
 
   }
 
