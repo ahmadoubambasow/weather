@@ -102,12 +102,18 @@ export class SearchComponent  implements OnInit {
     this.router.navigate(['/tabs/weather']);
   }
 
-  useMyPosition(): void {
+  async useMyPosition(): Promise<void> {
 
-    console.log('Retour position GPS');
+    // Réactive la position automatique
+    await this.settingsService.update({
 
-    this.selectedLocation.clear();
+      autoLocation: true
+    });
 
+    // Supprime la ville sélectionnée
+    await this.selectedLocation.clear();
+
+    // Retour à la météo
     this.router.navigate(['/tabs/weather']);
   }
   
