@@ -101,14 +101,71 @@ export class WeatherFacade {
 
       switchMap(([selected, settings]) => {
 
-        console.log('Weatherfacade settings :', settings);
-        console.log('Weatherfacade location :', selected);
+        console.log('AutoLocation :', settings.autoLocation);
+        console.log('Ville sélectionnée :', selected);
 
+        /**
+         * ==========================================================
+         * 1. Position automatique activée → GPS
+         * ==========================================================
+         */
+        if (settings.autoLocation) {
+
+          return from(
+
+            this.geolocationService.getCurrentLocation()
+
+          ).pipe(
+
+            switchMap(position =>
+
+              this.weatherService.getWeather(
+
+                position.latitude,
+
+                position.longitude
+
+              ).pipe(
+
+                map(response => this.buildDashboard(
+
+                  response,
+
+                  settings,
+
+                  'Ma position',
+
+                  '',
+
+                  '',
+
+                  position.latitude,
+
+                  position.longitude
+
+                ))
+
+              )
+
+            )
+
+          );
+
+        }
+
+        /**
+         * ==========================================================
+         * 2. Position automatique désactivée → ville choisie
+         * ==========================================================
+         */
         if (selected) {
 
           return this.weatherService.getWeather(
+
             selected.latitude,
+
             selected.longitude
+
           ).pipe(
 
             map(response => this.buildDashboard(
@@ -133,6 +190,11 @@ export class WeatherFacade {
 
         }
 
+        /**
+         * ==========================================================
+         * 3. Aucune ville → GPS en secours
+         * ==========================================================
+         */
         return from(
 
           this.geolocationService.getCurrentLocation()
@@ -142,8 +204,11 @@ export class WeatherFacade {
           switchMap(position =>
 
             this.weatherService.getWeather(
+
               position.latitude,
+
               position.longitude
+
             ).pipe(
 
               map(response => this.buildDashboard(
