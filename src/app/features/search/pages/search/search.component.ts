@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap 
 import { SearchFacade } from 'src/app/core/facades/search.facade';
 import { WeatherLocation } from 'src/app/core/models/ui/weather-location.model';
 import { SelectedLocationService } from 'src/app/core/services/selected-location.service';
+import { SettingsService } from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'app-search',
@@ -30,6 +31,8 @@ export class SearchComponent  implements OnInit {
   private readonly searchSubject = new Subject<string>();
 
   private readonly selectedLocation = inject(SelectedLocationService);
+
+  private readonly settingsService = inject(SettingsService);
 
   private readonly router = inject(Router);
 
@@ -77,7 +80,7 @@ export class SearchComponent  implements OnInit {
   }
 
 
-  selectCity(city: WeatherLocation) {
+  async selectCity(city: WeatherLocation) {
 
 
     console.log(
@@ -85,8 +88,17 @@ export class SearchComponent  implements OnInit {
       city
     );
 
+    // Passage en mode manuel
+    await this.settingsService.update({
+
+      autoLocation: false
+    });
+
+
+    // Sauvegarde de la ville choisie
     this.selectedLocation.select(city);
 
+    // Navigation
     this.router.navigate(['/tabs/weather']);
   }
 
