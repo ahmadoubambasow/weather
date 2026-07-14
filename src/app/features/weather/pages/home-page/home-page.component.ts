@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { IonContent } from '@ionic/angular/standalone';
 
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 
 import { CurrentWeatherCardComponent } from '../../components/current-weather-card/current-weather-card.component';
 import { WeatherMetricCardComponent } from '../../components/weather-metric-card/weather-metric-card.component';
@@ -17,6 +17,8 @@ import { GeolocationService } from 'src/app/core/services/geolocation';
 import { SelectedLocationService } from 'src/app/core/services/selected-location.service';
 import { FavoritesService } from 'src/app/core/services/favorites.service';
 import { WeatherLocation } from 'src/app/core/models/ui/weather-location.model';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { SettingsService } from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'app-home-page',
@@ -51,6 +53,10 @@ export class HomePage implements OnInit {
   private readonly favoritesService =
     inject(FavoritesService);
 
+  private readonly notificationService = inject(NotificationService);
+
+  private readonly settingsService = inject(SettingsService);
+
   constructor(
     private readonly weatherFacade: WeatherFacade
   ) {
@@ -62,6 +68,53 @@ export class HomePage implements OnInit {
   async ngOnInit(): Promise<void> {
 
     await this.selectedLocation.restore();
+
+    this.dashboard$ = this.selectedLocation.location$.pipe(
+
+      switchMap(location => {
+
+        if (location) {
+
+          return this.weatherFacade.getDashboardByLocation(
+
+            location.latitude,
+            location.longitude,
+            location.name,
+            location.country,
+            location.region
+          
+          );
+        }
+
+        return this.weatherFacade.getDashboard();
+      }),
+
+      tap(async dashboard => {
+
+        const settings =
+          this.settingsService.current;
+
+
+
+        if(
+
+          settings.notifications &&
+
+          settings.autoLocation &&
+
+          dashboard.current.temperature >= 30
+
+        ){
+
+          await this.notificationService.showHeatAlert(
+
+            dashboard.current.temperature
+
+          );
+
+        }
+      })
+    )
 
   }
 

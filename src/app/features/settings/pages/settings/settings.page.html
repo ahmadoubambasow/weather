@@ -249,12 +249,7 @@
 
         [checked]="settings.notifications"
 
-        (ionChange)="update({
-
-          notifications:
-          $event.detail.checked
-
-        })">
+        (ionChange)="updateNotification($event.detail.checked)">
 
       </ion-toggle>
 

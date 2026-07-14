@@ -10,6 +10,7 @@ import {
 
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { AppSettings } from 'src/app/core/models/ui/settings.model';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 
 @Component({
@@ -49,6 +50,8 @@ export class SettingsPage {
 
   settings$ =
     this.settingsService.settings$;
+
+  private readonly notificationService = inject(NotificationService);
 
 
   constructor() {
@@ -126,4 +129,31 @@ export class SettingsPage {
     });
 
   }
+
+
+  async updateNotification(enabled: boolean): Promise<void> {
+
+    if (enabled) {
+
+      const granted = await this.notificationService.requestPermission();
+
+      if (!granted) {
+
+        await this.settingsService.update({
+
+          notifications: false
+        });
+
+        return;
+      }
+
+      await this.notificationService.showTestNotification();
+    }
+
+    await this.settingsService.update({
+
+      notifications: enabled
+    });
+  }
+
 }
